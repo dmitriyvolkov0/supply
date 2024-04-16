@@ -35,13 +35,12 @@ export const checkUserAuth = (token) => {
 
 // Получить все отделы
 export const getUserDivisions = () =>{
-    return [
-        { id: 1, name: 'Бухгалтерия' },
-        { id: 2, name: 'Снабжение' },
-        { id: 3, name: 'Спецтехника' },
-        { id: 4, name: 'IT отдел' },
-        { id: 5, name: 'Склад' },
-      ];
+    return fetch(apiUrl + 'divisions/', {
+        method: 'GET',
+    })
+    .then(res => res.json())
+    .then(res => res)
+    .catch(err => err);
 }
 
 // Получить все роли пользователей

@@ -1,12 +1,8 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import UserContext from '@contexts/User/UserContext';
 
-import Avatar from '@mui/material/Avatar';
-import { blue } from '@mui/material/colors';
-import { Tooltip, Button, Typography } from '@mui/material';
-
+import AvatarBlock from './AvatarBlock/AvatarBlock';
 import AccountWindow from './AccountWindow/AccountWindow';
-
 
 export default function Account() {
     const {user, setUser} = useContext(UserContext);
@@ -23,13 +19,11 @@ export default function Account() {
 
     return (
         <>
-            <div onClick={() => setIsOpen(!isOpen)} className='md:ml-10 cursor-pointer'>
-                <Tooltip title="Профиль">
-                    <Avatar sx={{ bgcolor: blue[400], fontSize: 15}}>
-                        {firstLetters}
-                    </Avatar>
-                </Tooltip>
-            </div>
+            <AvatarBlock 
+                isOpen={isOpen} 
+                firstLetters={firstLetters}
+                setIsOpen={setIsOpen}
+            />
 
             {
                 isOpen && 

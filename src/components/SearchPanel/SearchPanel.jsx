@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import s from './style.module.css';
 
 import IconButton from '@mui/material/IconButton';
@@ -6,11 +6,25 @@ import SearchIcon from '@mui/icons-material/Search';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Tooltip } from '@mui/material';
 
-export default function SearchPanel() {
+import AdvancedSearch from './AdvancedSearch/AdvancedSearch';
+
+export default function SearchPanel({ props }) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const advancedSearchWrapperRef = useRef(null);
+
+    useEffect( () => {
+        document.addEventListener("click", (e) => {
+            e.target === advancedSearchWrapperRef.current && setIsOpen(false);
+        });
+    }, []);
+  
   return (
-    <form className={s.searchPanel}>
+    <form onSubmit={props.onSubmitSearchForm} className={s.searchPanel}>
         <input 
             className={s.searchInput}
+            value={props.searchValue}
+            onInput={(e) => props.setSearchValue(e.target.value)}
             placeholder="Начните искать..."
         />
 
@@ -21,10 +35,18 @@ export default function SearchPanel() {
         </Tooltip>
 
         <Tooltip title="Расширенный поиск">
-          <IconButton sx={{color: '#fff'}}>
+          <IconButton onClick={() => setIsOpen(true)} sx={{color: '#fff'}}>
             <MoreVertIcon sx={{fontSize: 20}}/>
           </IconButton>
         </Tooltip>
+
+        {
+          isOpen && 
+            <AdvancedSearch 
+              props={{...props}}
+              advancedSearchWrapperRef={advancedSearchWrapperRef}
+            />
+        }
 
     </form>
   )
