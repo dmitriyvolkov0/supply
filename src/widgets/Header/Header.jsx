@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -6,24 +7,21 @@ import { Container } from '@mui/material';
 
 import LeftMenu from '@components/LeftMenu/LeftMenu';
 import SearchPanel from '@components/SearchPanel/SearchPanel';
+import Account from '@components/Account/Account';
 
 import { SEARCH_PAGE } from '@utils/constants/routes.js'; 
-import { useNavigate } from 'react-router-dom';
 
-import Account from '@components/Account/Account';
 import { getFullDateByStr } from '@utils/helpers/timeFunctions.js';
 import { getUserDivisions } from '@services/api.js';
 
 export default function Header({ navTitle }) {
+  const navigate = useNavigate();
   const [searchValue, setSearchValue] = useState('');
 
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [division, setDivision] = useState('');
-
   const [divisionsList, setDivisionsList] = useState([]);
-
-  const navigate = useNavigate();
 
   const onSubmitSearchForm = (e) =>{
     e.preventDefault();
