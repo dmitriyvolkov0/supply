@@ -7,8 +7,7 @@ import AboutSupplyText from '@components/AboutSupplyText/AboutSupplyText';
 import {Button} from '@mui/material';
 import Select from '@components/Select/Select';
 
-import getUserDivisions from '@services/getUserDivisions.js';
-import getUserRoles from '@services/getUserRoles.js';
+import { getUserDivisions, getUserRoles } from '@services/api.js';
 
 export default function SignUpForm({setActiveForm, onSignUp}) {
   const [fields, setFields] = useState({

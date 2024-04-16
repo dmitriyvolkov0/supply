@@ -38,7 +38,7 @@ export default function App() {
         <Routes>
           <Route path={AUTH_PAGE} element={<AuthPage setUser={ setUser }/>}/>
           <Route path={REQUESTS_PAGE} element={
-            <PrivateRoute>
+            <PrivateRoute navTitle="Заявки">
               <RequestsPage/>
             </PrivateRoute>
           }/>
