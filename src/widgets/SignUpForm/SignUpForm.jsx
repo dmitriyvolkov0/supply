@@ -1,15 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import s from './style.module.css';
 import { TextField, Typography  } from '@mui/material';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import AboutSupplyText from '@components/AboutSupplyText/AboutSupplyText';
 
-import {Button} from '@mui/material';
+import { Button } from '@mui/material';
 import Select from '@components/Select/Select';
 
 import { getUserDivisions, getUserRoles } from '@services/api.js';
 
 export default function SignUpForm({setActiveForm, onSignUp}) {
+  const [roles, setRoles] = useState([]);
+  const [divisions, setDivisions] = useState([]);
+  
   const [fields, setFields] = useState({
     fio: '',
     role: '',
@@ -17,14 +20,21 @@ export default function SignUpForm({setActiveForm, onSignUp}) {
     email: '',
     password: ''
   });
-  
-  const userRoles = getUserRoles();
-  const userDivisions = getUserDivisions();
 
   const onSubmitHandle = (e) =>{
     e.preventDefault();
     onSignUp(fields);
   }
+
+  useEffect(() => {
+    getUserRoles()
+      .then(res => setRoles(res))
+      .catch(err => alert('Возникла внутренняя ошибка!'));
+      
+    getUserDivisions()
+      .then(res => setDivisions(res))
+      .catch(err => alert('Возникла внутренняя ошибка!'));
+  }, []);
 
   return (
     <div className={s.formWrapper}>
@@ -44,7 +54,7 @@ export default function SignUpForm({setActiveForm, onSignUp}) {
               value={fields.role}
               onChange={e => setFields({...fields, role: e.target.value})}
               label="Роль пользователя" 
-              values={userRoles}
+              values={roles}
               required
             />
 
@@ -52,7 +62,7 @@ export default function SignUpForm({setActiveForm, onSignUp}) {
               value={fields.division}
               onChange={e => setFields({...fields, division: e.target.value})}
               label="Рабочий отдел" 
-              values={userDivisions}
+              values={divisions}
               required
             />
             
