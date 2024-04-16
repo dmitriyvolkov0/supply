@@ -60,3 +60,11 @@ export const getAllUsers = () => {
         .then(res => res)
         .catch(err => err);
 }
+
+// Получить все записи, которые не находятся в архиве
+export const getRequests = () => {
+    return fetch(apiUrl + 'requests/')
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err);
+}
