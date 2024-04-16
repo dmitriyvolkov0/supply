@@ -1,0 +1,26 @@
+.searchPanel{
+    margin-right: 20px;
+}
+
+.searchInput{
+    background: var(--primary-color-lighten);
+    margin-right: 10px;
+    height: 45px;
+    padding: 7px 15px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    width: 200px;
+    color: #fff;
+    font-size: 14px;
+    transition: .3s;
+}
+
+.searchInput:focus{
+    width: 260px;
+}
+
+.searchInput::placeholder{
+    color: #ddd;
+}
