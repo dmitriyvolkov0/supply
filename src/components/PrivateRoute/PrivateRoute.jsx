@@ -21,7 +21,7 @@ export default function PrivateRoute({navTitle, children }) {
 
     if(user){
         return(
-            <div className='pt-[60px]'>
+            <div style={{paddingTop: '80px'}}>
                 <Header navTitle={navTitle}/>
                 { children }
             </div>
