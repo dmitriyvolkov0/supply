@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import s from './style.module.css';
+
+import { Button } from '@mui/material';
 import { TextField, Typography  } from '@mui/material';
+import Select from '@components/Select/Select';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import AboutSupplyText from '@components/AboutSupplyText/AboutSupplyText';
 
-import { Button } from '@mui/material';
-
-export default function SignInForm({ setActiveForm, onSignIn }) {
+export default function SignInForm({ users, setActiveForm, onSignIn }) {
   const [fields, setFields] = useState({
-    email: '',
+    userId: '',
     password: ''
   });
 
@@ -23,11 +24,13 @@ export default function SignInForm({ setActiveForm, onSignIn }) {
             <LockOpenIcon className={s.icon}/>
             <Typography className={s.title} variant="h5" component="h5">Вход</Typography>
 
-            <TextField 
-              onInput={e => setFields({...fields, email: e.target.value})} 
-              label="Введите ваш email" 
-              type="email"
-              required/>
+            <Select
+              value={fields.userId}
+              onChange={e => setFields({...fields, userId: +e.target.value})}
+              label="Выберите пользователя" 
+              values={users}
+              required
+            />
               
             <TextField 
               onInput={e => setFields({...fields, password: e.target.value})} 
