@@ -61,9 +61,10 @@ export const getAllUsers = () => {
         .catch(err => err);
 }
 
-// Получить все записи, которые не находятся в архиве
-export const getRequests = () => {
-    return fetch(apiUrl + 'requests/')
+// Получить все записи, к которым есть доступ у текущего пользователя
+export const getUserRequests = (userId, count, isArchive) => {
+    let status = isArchive ? 'archive' : 'active';
+    return fetch(apiUrl + `requests/?status=${status}&userId=${userId}&count=${count}`)
         .then(res => res.json())
         .then(res => res)
         .catch(err => err);
