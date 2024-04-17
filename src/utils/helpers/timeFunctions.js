@@ -29,6 +29,16 @@ export function getFullDateByStr(paramDate){
     }
 }
 
+// Отформатировнная строка с временем из бд
+export function getFullDateByStrFromDb(date){
+    const originalDateTime = date;
+    const dateTime = new Date(originalDateTime);
+    const day = String(dateTime.getDate()).padStart(2, '0');
+    const month = String(dateTime.getMonth()+1).padStart(2, '0');
+    const year = dateTime.getFullYear();
+    return `${day}.${month}.${year} ${dateTime.getHours()}:${dateTime.getMinutes()}`;
+}
+
 // export function getCurrentTime(time){
 //     const date = time ? time : new Date();
 //     const hours = String(date.getHours()).padStart(2, '0');
