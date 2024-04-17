@@ -1,0 +1,45 @@
+.cl_1{
+    background: #ff66009a;
+}
+.cl_2{
+    background: #e3e362;
+}
+.cl_3{
+    background: #994ec7ad;
+}
+.cl_4{
+    background: #c74e90b7; 
+}
+.cl_5{
+    background: #25fff0;
+}
+.cl_6{
+    background: #69a4fc;
+}
+.cl_7{
+    background: #544bff93;
+}
+.cl_8{
+    background: #44ff2bb0;
+}
+.cl_9{
+    background: #44ff2bb0;
+}
+.cl_10{
+    background: #30c437a8;
+}
+.cl_11{
+    background: #a3a3a3b0;
+}
+
+.status{
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.warehouseText{
+    padding: 0;
+    margin: 0;
+    font-weight: 500;
+}
