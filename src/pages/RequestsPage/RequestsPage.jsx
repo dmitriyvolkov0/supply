@@ -4,7 +4,7 @@ import ActionsContext from '@contexts/Actions/ActionsContext';
 
 import { Container } from '@mui/material';
 import RequestsTable from '@components/RequestsTable/RequestsTable';
-import { getUserRequests, deleteRequestById } from '@services/api.js';
+import { getUserRequests, deleteRequestById, setStatus } from '@services/api.js';
 
 export default function RequestsPage({ user }) {
   const { setActions } = useContext(ActionsContext); //контекст с методами изменения состояния заявки
@@ -44,7 +44,15 @@ export default function RequestsPage({ user }) {
     const handleRequestWarehouse = (requestId) => {
       let isHandle = window.confirm("Принять в обработку?");
       if(isHandle){
-        console.log('Принято в обработку складом');
+        setStatus(requestId, 2)
+          .then(res => {
+            if(res.status){
+              alert('Вы успешно приняли заявку в обработку!');
+            }else{
+              alert('Во время принятия заявки в обработку произошла ошибка!');
+            }
+          })
+          .catch(err => alert('Возникла внутренняя ошибка!'));
       }
     }
 
