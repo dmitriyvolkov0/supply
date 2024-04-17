@@ -27,9 +27,11 @@ export default function RequestsTable({ requests, hideButtons }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              <Row/>
-              <Row/>
-              <Row/>
+              {
+                requests && requests.map((item, index) => 
+                  <Row data={item} hideButtons={hideButtons} key={'row-' + index}/>
+                )
+              }
             </TableBody>
           </Table>
         </TableContainer> 
