@@ -101,38 +101,38 @@ const UserButtons = ({requestId, statusId}) => {
 }
 
 // Кнопки зав.складом
-const WarehouseButtons = ({blankId, statusId}) => {
+const WarehouseButtons = ({requestId, statusId}) => {
     const { actions } = useContext(ActionsContext);
     switch (statusId) {
         case 1:
-            return <HandleRequestWarehouseBut onClick={() => actions.handleRequestWarehouse(blankId)}/>
+            return <HandleRequestWarehouseBut onClick={() => actions.handleRequestWarehouse(requestId)}/>
         case 2:
-            return <IndicateBalancesBut onClick={() => actions.indicateBalances(blankId)}/>
+            return <IndicateBalancesBut onClick={() => actions.indicateBalances(requestId)}/>
         case 7:
-            return <ArrivedInWarehouseBut onClick={() => actions.arrivedInWarehouse(blankId)}/>
+            return <ArrivedInWarehouseBut onClick={() => actions.arrivedInWarehouse(requestId)}/>
         case 8:
-            return <MaterialTransferredBut onClick={() => actions.materialTransferred(blankId)}/>
+            return <MaterialTransferredBut onClick={() => actions.materialTransferred(requestId)}/>
         case 9:
-            return <MaterialTransferredBut onClick={() => actions.materialTransferred(blankId)}/>
+            return <MaterialTransferredBut onClick={() => actions.materialTransferred(requestId)}/>
         default:
             break;
     }
 }
 
 // Кнопки снабжения
-const SnabButtons = ({ blankId, statusId }) => {
+const SnabButtons = ({ requestId, statusId }) => {
     const { actions } = useContext(ActionsContext);
     switch (statusId) {
         case 5:
             return <>
-                <EditBut onClick={() => actions.editRequest(blankId)}/> 
-                <HandleRequestSnabBut onClick={() => actions.handleRequestSnab(blankId)}/>
+                <EditBut onClick={() => actions.editRequest(requestId)}/> 
+                <HandleRequestSnabBut onClick={() => actions.handleRequestSnab(requestId)}/>
             </>;
         case 6:
             return <>
-                <EditBut onClick={() => actions.editRequest(blankId)}/> 
-                <MaterialsArrivedWarehouseBut onClick={() => actions.materialsArrivedWarehouse(blankId)}/>
-                <MaterialsArrivedObjectBut onClick={() => actions.materialsArrivedObject(blankId)}/>
+                <EditBut onClick={() => actions.editRequest(requestId)}/> 
+                <MaterialsArrivedWarehouseBut onClick={() => actions.materialsArrivedWarehouse(requestId)}/>
+                <MaterialsArrivedObjectBut onClick={() => actions.materialsArrivedObject(requestId)}/>
             </>
     
         default:
@@ -141,17 +141,17 @@ const SnabButtons = ({ blankId, statusId }) => {
 }
 
 // Кнопки контролёра
-const ControlButtons = ({ blankId, statusId }) => {
+const ControlButtons = ({ requestId, statusId }) => {
     const { actions } = useContext(ActionsContext);
     switch (statusId) {
         case 3:
             return <>
-                <HandleRequestControlBut onClick={() => actions.handleRequestControlBut(blankId)}/>
+                <HandleRequestControlBut onClick={() => actions.handleRequestControlBut(requestId)}/>
             </>;
         case 4:
             return <>
-                <EditBut onClick={() => actions.editRequest(blankId)}/> 
-                <MaterialsEditControlBut onClick={() => actions.editRequest(blankId)}/> 
+                <EditBut onClick={() => actions.editRequest(requestId)}/> 
+                <MaterialsEditControlBut onClick={() => actions.editRequest(requestId)}/> 
             </>
     
         default:
