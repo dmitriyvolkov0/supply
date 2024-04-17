@@ -69,3 +69,11 @@ export const getUserRequests = (userId, count, isArchive) => {
         .then(res => res)
         .catch(err => err);
 }
+
+// Получить список материалов, принадлежащих како-либо заявке по указанному id
+export const getMaterialsByRequestId = (requestId) => {
+    return fetch(apiUrl + `materials?requestId=${requestId}`)
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err);
+}
