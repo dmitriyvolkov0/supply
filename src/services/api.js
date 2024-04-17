@@ -62,8 +62,7 @@ export const getAllUsers = () => {
 }
 
 // Получить все записи, к которым есть доступ у текущего пользователя
-export const getUserRequests = (userId, count, isArchive) => {
-    let status = isArchive ? 'archive' : 'active';
+export const getUserRequests = (userId, count, status) => {
     return fetch(apiUrl + `requests/?status=${status}&userId=${userId}&count=${count}`)
         .then(res => res.json())
         .then(res => res)
@@ -73,6 +72,16 @@ export const getUserRequests = (userId, count, isArchive) => {
 // Получить список материалов, принадлежащих како-либо заявке по указанному id
 export const getMaterialsByRequestId = (requestId) => {
     return fetch(apiUrl + `materials?requestId=${requestId}`)
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err);
+}
+
+// Удалить заявку по id
+export const deleteRequestById = (requestId) => {
+    return fetch(apiUrl + `deleteRequest/${requestId}`,{
+        method: 'DELETE'
+    })
         .then(res => res.json())
         .then(res => res)
         .catch(err => err);
