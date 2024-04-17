@@ -42,7 +42,7 @@ export default function Status({statusId, statusName, warehouseName}) {
         <div className={`${colorClass} ${s.status}`}>
             {statusName}
             
-            {+statusId === 6 && warehouseName && 
+            {+statusId === 8 && warehouseName && 
                 <p className={s.warehouseText}>
                     {warehouseName}
                 </p>
