@@ -19,7 +19,7 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
 import { checkUserAuth } from './services/api.js';
 
 export default function App() {
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(()=> {
     let token = localStorage.getItem('supplyToken');
@@ -39,7 +39,7 @@ export default function App() {
           <Route path={AUTH_PAGE} element={<AuthPage setUser={ setUser }/>}/>
           <Route path={REQUESTS_PAGE} element={
             <PrivateRoute navTitle="Заявки">
-              <RequestsPage/>
+              <RequestsPage user={user}/>
             </PrivateRoute>
           }/>
           <Route path={ARCHIVE_PAGE} element={<ArchivePage/>}/>
