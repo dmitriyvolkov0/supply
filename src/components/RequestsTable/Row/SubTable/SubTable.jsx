@@ -35,59 +35,57 @@ export default function SubTable({ requestId, isOpen }) {
                     {!materialsList || materialsList.length === 0 ? 
                             <LoadingData/>
                         :
-                            <>
-                                <Box sx={{ margin: 1 }}>
-                                    <Table size="small" aria-label="purchases">
-                                        <TableHead>
-                                            <TableRow>
-                                                <TableCell>
-                                                    <span>№</span>
-                                                    <Tooltip title="Обновить информацию">
-                                                        <IconButton>
-                                                            <CachedIcon/>
+                            <Box sx={{ margin: 1 }}>
+                                <Table size="small" aria-label="purchases">
+                                    <TableHead>
+                                        <TableRow>
+                                            <TableCell>
+                                                <span>№</span>
+                                                <Tooltip title="Обновить информацию">
+                                                    <IconButton>
+                                                        <CachedIcon/>
+                                                    </IconButton>  
+                                                </Tooltip>
+                                            </TableCell>
+                                            <TableCell>Наименование</TableCell>
+                                            <TableCell align="right">Кол-во</TableCell>
+                                            <TableCell align="right">Склад</TableCell>
+                                            <TableCell align="right">Описание</TableCell>
+                                            <TableCell align="right">Влож.</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {
+                                            materialsList.map((data, index) => 
+                                                <TableRow key={'subtable-' + index}>
+                                                    <TableCell component="th" scope="row">
+                                                        {++index}
+                                                    </TableCell>
+                                                    <TableCell>{data.name}</TableCell>
+                                                    <TableCell align="right">
+                                                        {data.quantity} {data.unit}
+                                                    </TableCell>
+                                                    <TableCell align="right">
+                                                        {data.residue}
+                                                    </TableCell>
+                                                    <TableCell align="right">
+                                                        {data.note}
+                                                    </TableCell>
+                                                    <TableCell align="right">
+                                                        <IconButton disabled={data.link.trim().length === 0 ? true : false}>
+                                                            <Link to={data.link} target="_blank">
+                                                                <InsertLinkIcon/>
+                                                            </Link>
                                                         </IconButton>  
-                                                    </Tooltip>
-                                                </TableCell>
-                                                <TableCell>Наименование</TableCell>
-                                                <TableCell align="right">Кол-во</TableCell>
-                                                <TableCell align="right">Склад</TableCell>
-                                                <TableCell align="right">Описание</TableCell>
-                                                <TableCell align="right">Влож.</TableCell>
-                                            </TableRow>
-                                        </TableHead>
-                                        <TableBody>
-                                            {
-                                                materialsList.map((data, index) => 
-                                                    <TableRow key={'subtable-' + index}>
-                                                        <TableCell component="th" scope="row">
-                                                            {++index}
-                                                        </TableCell>
-                                                        <TableCell>{data.name}</TableCell>
-                                                        <TableCell align="right">
-                                                            {data.quantity} {data.unit}
-                                                        </TableCell>
-                                                        <TableCell align="right">
-                                                            {data.residue}
-                                                        </TableCell>
-                                                        <TableCell align="right">
-                                                            {data.note}
-                                                        </TableCell>
-                                                        <TableCell align="right">
-                                                            <IconButton disabled={data.link.trim().length === 0 ? true : false}>
-                                                                <Link to={data.link} target="_blank">
-                                                                    <InsertLinkIcon/>
-                                                                </Link>
-                                                            </IconButton>  
-                                                        </TableCell>
-                                                    </TableRow>
-                                                )
-                                            }
+                                                    </TableCell>
+                                                </TableRow>
+                                            )
+                                        }
 
-                                        </TableBody>
-                                        
-                                    </Table>
-                                </Box>
-                            </>
+                                    </TableBody>
+                                    
+                                </Table>
+                            </Box>
                     }
                     
                 </Collapse>
