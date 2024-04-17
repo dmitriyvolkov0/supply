@@ -86,3 +86,14 @@ export const deleteRequestById = (requestId) => {
         .then(res => res)
         .catch(err => err);
 }
+
+// Установить статус заявки
+export const setStatus = (requestId, statusId) => {
+    return fetch(apiUrl + `setRequestStatus`,{
+        method: 'PUT',
+        body: JSON.stringify({requestId: requestId, statusId: statusId})
+    })
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err);
+}
