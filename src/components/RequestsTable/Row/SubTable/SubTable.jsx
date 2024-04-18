@@ -23,9 +23,16 @@ export default function SubTable({ requestId, isOpen }) {
 
     const [materialsList, setMaterialsList] = useState(null);
 
-    useEffect(() => {
+    const getMaterials = () =>
         getMaterialsByRequestId(requestId)
-            .then(res => setMaterialsList(res))
+            .then(res => Array.isArray(res) && setMaterialsList(res));
+
+    useEffect(() => {
+        isOpen && getMaterials();
+    }, [isOpen]);
+
+    useEffect(() => {
+        getMaterials();
     }, [])
 
     return (
