@@ -57,7 +57,7 @@ export default function SubTable({ requestId, isOpen }) {
                                             <TableCell>
                                                 <span>№</span>
                                                 <Tooltip title="Обновить информацию">
-                                                    <IconButton onClick={refreshClickHandle} className={isRotateBut && s.refreshButActive}>
+                                                    <IconButton onClick={refreshClickHandle} className={isRotateBut ? s.refreshButActive : ' '}>
                                                         <CachedIcon/>
                                                     </IconButton>  
                                                 </Tooltip>
