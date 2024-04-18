@@ -27,7 +27,7 @@
 }
 
 .userEmail{
-    margin: 5px 0 15px 0;
+    margin: 5px 0 5px 0;
     font-size: 13px;
     color: #777;
 }
@@ -43,6 +43,15 @@
     border-top-right-radius: 10px;
     border-bottom-left-radius: 10px;
     margin: 0;
+}
+
+.userRole{
+    margin: 5px 0 15px 0;
+    padding: 5px 10px;
+    color: var(--primary-color);
+    background: var(--primary-color-lighten);
+    border-radius: 5px;
+    font-size: 13px;
 }
 
 .logoutBut{
