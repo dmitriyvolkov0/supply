@@ -108,3 +108,11 @@ export const setBalances = (materials) => {
         .then(res => res)
         .catch(err => err);
 }
+
+// Получить информацию о пользователе по id заявки
+export const getUserByRequestId = (requestId) => {
+    return fetch(apiUrl + `getUserByRequestId/${requestId}`)
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err);
+}
