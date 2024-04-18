@@ -8,7 +8,8 @@ import {
   deleteRequestById, 
   setStatus, 
   getMaterialsByRequestId, 
-  setBalances 
+  setBalances,
+  getUserByRequestId
 } from '@services/api.js';
 
 import RequestsTable from '@components/RequestsTable/RequestsTable';
@@ -85,28 +86,44 @@ export default function RequestsPage({ user }) {
 
     // Установить указанные остатки материалов в бд
     const setBalancesHandle = (materials) => {
-      let requestId = materials[0].request_id;
+      if(materials.length !== 0) {
+        let requestId = materials[0].request_id;
 
-      setBalances(materials)
-        .then(res => {
-          if(res.status){
-            alert('Остатки успешно указаны!');
-            setIsModalIndicateBalancesOpen(false);
-          }else{
-            alert('Возникла ошибка при указании остатков!');
-          }
-        })
-
-        .then(() => {
-          setStatus(requestId, 3)
-            .then(res => {
-              if(!res.status){
-
-              }
-            })
-            .catch(err => alert('Возникла внутренняя ошибка!'));
-        })
-        .catch(err => alert('Возникла внутренняя ошибка!'));
+        console.log(1);
+        getUserByRequestId(requestId) // получить пользователя по id заявки
+          .then(res => {
+            if(res.status){
+              const userDivisionId = +res.userData.division_id;
+              
+              setBalances(materials) //устанавливаем остатки
+                .then(res => {
+                  if(res.status){
+                    alert('Остатки успешно указаны!');
+                    setIsModalIndicateBalancesOpen(false);
+                  }else{
+                    alert('Возникла ошибка при указании остатков!');
+                  }
+                })
+        
+                .then(() => { 
+                  // Меняем статус. Если пользователь принадлежит отделу "стройка (9) или завод (7), 
+                  // то передаем в обработку к контролёру (статус заявки 3), иначе отправляем на обработку снабжению (статус 5)"
+                  if(userDivisionId === 7 || userDivisionId === 9 ){
+                    setStatus(requestId, 3)
+                      .then(res => !res.status && alert('При изменении статуса заявки возникла ошибка!'))
+                      .catch(err => alert('Возникла внутренняя ошибка!'));
+                    }else{
+                    setStatus(requestId, 5)
+                      .then(res => !res.status && alert('При изменении статуса заявки возникла ошибка!'))
+                      .catch(err => alert('Возникла внутренняя ошибка!'));
+                  }
+                })
+                .catch(err => alert('Возникла внутренняя ошибка!'));
+            } 
+          });
+      }else{
+        alert('Информация о материалах не найдена! Пожалуйста сообщите об этом нам. ');
+      }
     }
 
   useEffect(() => {
@@ -125,8 +142,15 @@ export default function RequestsPage({ user }) {
     };
     
     setActions(actions);
-    getAllRequests(perPage);
   }, []);
+
+  useEffect(() => {
+    getAllRequests(perPage);
+    const interval = setInterval(() => {
+      getAllRequests(perPage);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [perPage]);
 
   return (
     <Container>
