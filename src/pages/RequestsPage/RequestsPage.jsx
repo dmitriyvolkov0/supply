@@ -89,7 +89,6 @@ export default function RequestsPage({ user }) {
       if(materials.length !== 0) {
         let requestId = materials[0].request_id;
 
-        console.log(1);
         getUserByRequestId(requestId) // получить пользователя по id заявки
           .then(res => {
             if(res.status){
