@@ -97,3 +97,14 @@ export const setStatus = (requestId, statusId) => {
         .then(res => res)
         .catch(err => err);
 }
+
+// Указать остатки материалов на складе
+export const setBalances = (materials) => {
+    return fetch(apiUrl + `setBalances`,{
+        method: 'PUT',
+        body: JSON.stringify(materials)
+    })
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err);
+}
