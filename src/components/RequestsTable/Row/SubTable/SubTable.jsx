@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import s from './style.module.css'
 
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
@@ -33,7 +34,14 @@ export default function SubTable({ requestId, isOpen }) {
 
     useEffect(() => {
         getMaterials();
-    }, [])
+    }, []);
+
+    const [isRotateBut, setIsRotateBut] = useState(false);
+    const refreshClickHandle = () => {
+        setIsRotateBut(true);
+        setTimeout(() => setIsRotateBut(false), 1000);
+        getMaterials();
+    }
 
     return (
         <TableRow sx={{background: '#ddd'}}>
@@ -49,7 +57,7 @@ export default function SubTable({ requestId, isOpen }) {
                                             <TableCell>
                                                 <span>№</span>
                                                 <Tooltip title="Обновить информацию">
-                                                    <IconButton>
+                                                    <IconButton onClick={refreshClickHandle} className={isRotateBut && s.refreshButActive}>
                                                         <CachedIcon/>
                                                     </IconButton>  
                                                 </Tooltip>
