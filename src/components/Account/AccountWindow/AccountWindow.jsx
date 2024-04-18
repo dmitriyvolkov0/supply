@@ -11,8 +11,6 @@ export default function AccountWindow({user, setUser, accountWindowWrapperRef, f
         setUser(false);
     }
 
-    console.log(user);
-
     return (
         <div ref={accountWindowWrapperRef} className={s.accountDataWrapper}>
             <div className={s.accountData}>
