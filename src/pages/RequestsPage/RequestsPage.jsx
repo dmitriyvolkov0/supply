@@ -33,98 +33,99 @@ export default function RequestsPage({ user }) {
       .then(res => setRequests(res));
   }
 
-    // Удалить заявку
-    const deleteRequest = (requestId) => {
-      let isDelete = window.confirm("Вы уверены, что хотите удалить данную заявку?");
-      if(isDelete){
-        deleteRequestById(requestId)
+  // Удалить заявку
+  const deleteRequest = (requestId) => {
+    let isDelete = window.confirm("Вы уверены, что хотите удалить данную заявку?");
+    if(isDelete){
+      deleteRequestById(requestId)
+      .then(res => {
+        if(res.status){
+          alert('Заявка успешно удалена!');
+        }else{
+          alert('При удалении заявки возникла ошибка!');
+        }
+      })
+      .catch(err => alert('Возникла внутренняя ошибка!'))
+    }
+  }
+
+  // Изменить заявку
+  const editRequest = (requestId) => {
+    console.log('Изменить');
+  }
+
+  // Принять в обработку (на складе)
+  const handleRequestWarehouse = (requestId) => {
+    let isHandle = window.confirm("Принять в обработку?");
+    if(isHandle){
+      setStatus(requestId, 2)
         .then(res => {
           if(res.status){
-            alert('Заявка успешно удалена!');
+            alert('Вы успешно приняли заявку в обработку!');
           }else{
-            alert('При удалении заявки возникла ошибка!');
+            alert('Во время принятия заявки в обработку произошла ошибка!');
           }
         })
-        .catch(err => alert('Возникла внутренняя ошибка!'))
-      }
+        .catch(err => alert('Возникла внутренняя ошибка!'));
     }
+  }
 
-    // Изменить заявку
-    const editRequest = (requestId) => {
-      console.log('Изменить');
-    }
+    // Получить список материалов, принадлежащих выбранной заявке для установки остатков
+  const getMaterials = (requestId) => {
+    getMaterialsByRequestId(requestId)
+      .then(res => {
+        setMaterials(res);
+      }).catch(err => alert('Возникла внутренняя ошибка!'));
+  }
 
-    // Принять в обработку (на складе)
-    const handleRequestWarehouse = (requestId) => {
-      let isHandle = window.confirm("Принять в обработку?");
-      if(isHandle){
-        setStatus(requestId, 2)
-          .then(res => {
-            if(res.status){
-              alert('Вы успешно приняли заявку в обработку!');
-            }else{
-              alert('Во время принятия заявки в обработку произошла ошибка!');
-            }
-          })
-          .catch(err => alert('Возникла внутренняя ошибка!'));
-      }
-    }
+  // Указать остатки материалов на складе (открыть модальное окно)
+  const indicateBalances = (requestId) => {
+    setIsModalIndicateBalancesOpen(true);
+    getMaterials(requestId);
+  }
 
-      // Получить список материалов, принадлежащих выбранной заявке для установки остатков
-    const getMaterials = (requestId) => {
-      getMaterialsByRequestId(requestId)
+  // Установить указанные остатки материалов в бд
+  const setBalancesHandle = (materials) => {
+    if(materials.length !== 0) {
+      let requestId = materials[0].request_id;
+
+      getUserByRequestId(requestId) // получить пользователя по id заявки
         .then(res => {
-          setMaterials(res);
-        }).catch(err => alert('Возникла внутренняя ошибка!'));
-    }
-
-    // Указать остатки материалов на складе (открыть модальное окно)
-    const indicateBalances = (requestId) => {
-      setIsModalIndicateBalancesOpen(true);
-      getMaterials(requestId);
-    }
-
-    // Установить указанные остатки материалов в бд
-    const setBalancesHandle = (materials) => {
-      if(materials.length !== 0) {
-        let requestId = materials[0].request_id;
-
-        getUserByRequestId(requestId) // получить пользователя по id заявки
-          .then(res => {
-            if(res.status){
-              const userDivisionId = +res.userData.division_id;
-              
-              setBalances(materials) //устанавливаем остатки
-                .then(res => {
-                  if(res.status){
-                    alert('Остатки успешно указаны!');
-                    setIsModalIndicateBalancesOpen(false);
+          if(res.status){
+            const userDivisionId = +res.userData.division_id;
+            
+            setBalances(materials) //устанавливаем остатки
+              .then(res => {
+                if(res.status){
+                  alert('Остатки успешно указаны!');
+                  setIsModalIndicateBalancesOpen(false);
+                }else{
+                  alert('Возникла ошибка при указании остатков!');
+                }
+              })
+      
+              .then(() => { 
+                // Меняем статус. Если пользователь принадлежит отделу "стройка (9) или завод (7), 
+                // то передаем в обработку к контролёру (статус заявки 3), иначе отправляем на обработку снабжению (статус 5)"
+                if(userDivisionId === 7 || userDivisionId === 9 ){
+                  setStatus(requestId, 3)
+                    .then(res => !res.status && alert('При изменении статуса заявки возникла ошибка!'))
+                    .catch(err => alert('Возникла внутренняя ошибка!'));
                   }else{
-                    alert('Возникла ошибка при указании остатков!');
-                  }
-                })
-        
-                .then(() => { 
-                  // Меняем статус. Если пользователь принадлежит отделу "стройка (9) или завод (7), 
-                  // то передаем в обработку к контролёру (статус заявки 3), иначе отправляем на обработку снабжению (статус 5)"
-                  if(userDivisionId === 7 || userDivisionId === 9 ){
-                    setStatus(requestId, 3)
-                      .then(res => !res.status && alert('При изменении статуса заявки возникла ошибка!'))
-                      .catch(err => alert('Возникла внутренняя ошибка!'));
-                    }else{
-                    setStatus(requestId, 5)
-                      .then(res => !res.status && alert('При изменении статуса заявки возникла ошибка!'))
-                      .catch(err => alert('Возникла внутренняя ошибка!'));
-                  }
-                })
-                .catch(err => alert('Возникла внутренняя ошибка!'));
-            } 
-          });
-      }else{
-        alert('Информация о материалах не найдена! Пожалуйста сообщите об этом нам. ');
-      }
+                  setStatus(requestId, 5)
+                    .then(res => !res.status && alert('При изменении статуса заявки возникла ошибка!'))
+                    .catch(err => alert('Возникла внутренняя ошибка!'));
+                }
+              })
+              .catch(err => alert('Возникла внутренняя ошибка!'));
+          } 
+        });
+    }else{
+      alert('Информация о материалах не найдена! Пожалуйста сообщите об этом нам. ');
     }
+  }
 
+  
   useEffect(() => {
     let actions = {
       deleteRequest: deleteRequest,
@@ -132,7 +133,7 @@ export default function RequestsPage({ user }) {
       handleRequestWarehouse: handleRequestWarehouse,
       indicateBalances: indicateBalances,
       handleRequestSnab: 'handleRequestSnab',
-      handleRequestControlBut: 'handleRequestControlBut',
+      handleRequestControl: 'handleRequestControl',
       materialsArrivedWarehouse: 'materialsArrivedWarehouse',
       materialsArrivedObject: 'materialsArrivedObject',
       arrivedInWarehouse: 'arrivedInWarehouse',
