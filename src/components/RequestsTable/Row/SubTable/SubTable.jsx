@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import s from './style.module.css'
 
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
@@ -12,11 +11,11 @@ import TableRow from '@mui/material/TableRow';
 import { Link  } from 'react-router-dom';
 import Tooltip from '@mui/material/Tooltip';
 import LoadingData from './LoadingData/LoadingData';
+import RefreshBut from '@components/RefreshBut/RefreshBut';
 
 // icons
 import IconButton from '@mui/material/IconButton';
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
-import CachedIcon from '@mui/icons-material/Cached';
 
 import { getMaterialsByRequestId } from '@services/api.js';
 
@@ -36,12 +35,7 @@ export default function SubTable({ requestId, isOpen }) {
         getMaterials();
     }, []);
 
-    const [isRotateBut, setIsRotateBut] = useState(false);
-    const refreshClickHandle = () => {
-        setIsRotateBut(true);
-        setTimeout(() => setIsRotateBut(false), 1000);
-        getMaterials();
-    }
+    const refreshClickHandle = () => getMaterials();
 
     return (
         <TableRow sx={{background: '#ddd'}}>
@@ -57,9 +51,7 @@ export default function SubTable({ requestId, isOpen }) {
                                             <TableCell>
                                                 <span>№</span>
                                                 <Tooltip title="Обновить информацию">
-                                                    <IconButton onClick={refreshClickHandle} className={isRotateBut ? s.refreshButActive : ' '}>
-                                                        <CachedIcon/>
-                                                    </IconButton>  
+                                                    <RefreshBut onClick={refreshClickHandle}/>
                                                 </Tooltip>
                                             </TableCell>
                                             <TableCell>Наименование</TableCell>

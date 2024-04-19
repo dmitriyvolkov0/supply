@@ -14,6 +14,7 @@ import {
 
 import RequestsTable from '@components/RequestsTable/RequestsTable';
 import IndicateBalancesModal from '@widgets/IndicateBalancesModal/IndicateBalancesModal';
+import RequestsToolBar from '@widgets/RequestsToolBar/RequestsToolBar';
 
 export default function RequestsPage({ user }) {
   const { setActions } = useContext(ActionsContext); //контекст с методами изменения состояния заявки
@@ -181,6 +182,7 @@ export default function RequestsPage({ user }) {
 
   return (
     <Container>
+      <RequestsToolBar/>
       <RequestsTable requests={requests}/>
       <IndicateBalancesModal
         title="Укажите остатки материалов"
