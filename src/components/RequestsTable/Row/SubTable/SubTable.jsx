@@ -9,7 +9,6 @@ import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 
 import { Link  } from 'react-router-dom';
-import Tooltip from '@mui/material/Tooltip';
 import LoadingData from './LoadingData/LoadingData';
 import RefreshBut from '@components/RefreshBut/RefreshBut';
 
@@ -50,9 +49,7 @@ export default function SubTable({ requestId, isOpen }) {
                                         <TableRow>
                                             <TableCell>
                                                 <span>№</span>
-                                                <Tooltip title="Обновить информацию">
-                                                    <RefreshBut onClick={refreshClickHandle}/>
-                                                </Tooltip>
+                                                <RefreshBut onClick={refreshClickHandle}/>
                                             </TableCell>
                                             <TableCell>Наименование</TableCell>
                                             <TableCell align="right">Кол-во</TableCell>
