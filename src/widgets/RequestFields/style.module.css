@@ -1,0 +1,23 @@
+.title{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 30px;
+    font-weight: 500;
+    color: #333;
+    background: #c7e1e4;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formButtons{
+    display: flex;
+    gap: 10px;
+}
