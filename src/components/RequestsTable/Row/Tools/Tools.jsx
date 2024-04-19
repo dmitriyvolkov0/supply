@@ -80,7 +80,7 @@ const HandleRequestControlBut = ({ onClick }) => {
 
 //Информация была исправлена контролёром
 const MaterialsEditControlBut = ({ onClick }) => {
-    return <ButtonSkeleton onClick={onClick} title="Подтвердить и отправить далее" icon={<DoneAllIcon />}/>
+    return <ButtonSkeleton onClick={onClick} title="Подтвердить и отправить снабжению" icon={<DoneAllIcon />}/>
 }
 
 
@@ -151,7 +151,7 @@ const ControlButtons = ({ requestId, statusId }) => {
         case 4:
             return <>
                 <EditBut onClick={() => actions.editRequest(requestId)}/> 
-                <MaterialsEditControlBut onClick={() => actions.editRequest(requestId)}/> 
+                <MaterialsEditControlBut onClick={() => actions.confirmAndSendToSnab(requestId)}/> 
             </>
     
         default:

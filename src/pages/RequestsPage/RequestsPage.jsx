@@ -138,6 +138,19 @@ export default function RequestsPage({ user }) {
       .catch(err => alert('Возникла внутренняя ошибка!'));
   } 
 
+  // Подтвердить и отправить снабжению
+  const confirmAndSendToSnab  = (requestId) => {
+    setStatus(requestId, 5)
+      .then(res => {
+        if(res.status){
+          alert('Вы успешно подтвердили информацию! Заявка отправлена на обработку снабжению.');
+        }else{
+          alert('Во время обработки заявки произошла ошибка!')
+        }
+      })
+      .catch(err => alert('Возникла внутренняя ошибка!'));
+  } 
+
   
   useEffect(() => {
     let actions = {
@@ -147,6 +160,7 @@ export default function RequestsPage({ user }) {
       indicateBalances: indicateBalances,
       handleRequestSnab: 'handleRequestSnab',
       handleRequestControl: handleRequestControl,
+      confirmAndSendToSnab: confirmAndSendToSnab,
       materialsArrivedWarehouse: 'materialsArrivedWarehouse',
       materialsArrivedObject: 'materialsArrivedObject',
       arrivedInWarehouse: 'arrivedInWarehouse',
