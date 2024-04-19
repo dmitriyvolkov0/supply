@@ -5,12 +5,14 @@ import UserContext from '@contexts/User/UserContext';
 import {
   AUTH_PAGE,
   REQUESTS_PAGE,
+  CREATE_REQUEST_PAGE,
   ARCHIVE_PAGE,
   SEARCH_PAGE
 } from './utils/constants/routes.js';
 
 import AuthPage from './pages/AuthPage/AuthPage.jsx';
 import RequestsPage from './pages/RequestsPage/RequestsPage.jsx';
+import CreateRequestPage from './pages/CreateRequestPage/CreateRequestPage.jsx';
 import ArchivePage from './pages/ArchivePage/ArchivePage.jsx';
 import SearchPage from './pages/SearchPage/SearchPage.jsx';
 import NotFound from './pages/NotFound/NotFound.jsx';
@@ -40,6 +42,11 @@ export default function App() {
           <Route path={REQUESTS_PAGE} element={
             <PrivateRoute navTitle="Заявки">
               <RequestsPage user={user}/>
+            </PrivateRoute>
+          }/>
+          <Route path={CREATE_REQUEST_PAGE} element={
+            <PrivateRoute navTitle="Создать заявку">
+              <CreateRequestPage user={user}/>
             </PrivateRoute>
           }/>
           <Route path={ARCHIVE_PAGE} element={<ArchivePage/>}/>
