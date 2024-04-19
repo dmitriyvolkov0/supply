@@ -125,6 +125,19 @@ export default function RequestsPage({ user }) {
     }
   }
 
+  // Принять в обработку (контролёр)
+  const handleRequestControl  = (requestId) => {
+    setStatus(requestId, 4)
+      .then(res => {
+        if(res.status){
+          alert('Вы успешно приняли заявку в обработку!');
+        }else{
+          alert('Во время принятия заявки в обработку произошла ошибка!')
+        }
+      })
+      .catch(err => alert('Возникла внутренняя ошибка!'));
+  } 
+
   
   useEffect(() => {
     let actions = {
@@ -133,7 +146,7 @@ export default function RequestsPage({ user }) {
       handleRequestWarehouse: handleRequestWarehouse,
       indicateBalances: indicateBalances,
       handleRequestSnab: 'handleRequestSnab',
-      handleRequestControl: 'handleRequestControl',
+      handleRequestControl: handleRequestControl,
       materialsArrivedWarehouse: 'materialsArrivedWarehouse',
       materialsArrivedObject: 'materialsArrivedObject',
       arrivedInWarehouse: 'arrivedInWarehouse',

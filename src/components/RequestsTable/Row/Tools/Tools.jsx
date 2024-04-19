@@ -146,7 +146,7 @@ const ControlButtons = ({ requestId, statusId }) => {
     switch (statusId) {
         case 3:
             return <>
-                <HandleRequestControlBut onClick={() => actions.handleRequestControlBut(requestId)}/>
+                <HandleRequestControlBut onClick={() => actions.handleRequestControl(requestId)}/>
             </>;
         case 4:
             return <>
