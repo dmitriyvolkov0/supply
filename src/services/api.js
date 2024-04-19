@@ -116,3 +116,14 @@ export const getUserByRequestId = (requestId) => {
         .then(res => res)
         .catch(err => err);
 }
+
+// Создать заявку
+export const createRequest = (objectName, materials) =>{
+    return fetch(apiUrl + `createRequest`, {
+        method: 'POST',
+        body: JSON.stringify({objectName, materials })
+    })
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err);
+}
