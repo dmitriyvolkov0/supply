@@ -5,7 +5,7 @@ import { Container } from '@mui/material';
 import SignInForm from '@widgets/SignInForm/SignInForm';
 import SignUpForm from '@widgets/SignUpForm/SignUpForm';
 
-import { signIn, getAllUsers } from '@services/api.js';
+import { signIn, getAllUsers, checkUserAuth } from '@services/api.js';
 import { REQUESTS_PAGE } from '@utils/constants/routes.js';
 
 export default function AuthPage({ setUser }) {
@@ -17,9 +17,13 @@ export default function AuthPage({ setUser }) {
   const onSignIn = (data) => {
     signIn(data).then(res => {
       if(res.status){
-        setUser(res.userData);
-        localStorage.setItem('supplyToken', res.userData.token);
-        navigate(REQUESTS_PAGE);
+        checkUserAuth(res.data.token)
+          .then(userData => {
+            setUser(userData);
+            localStorage.setItem('supplyToken', res.data.token);
+            navigate(REQUESTS_PAGE);
+          })
+          .catch();
       }else{
         alert('Вы неверно ввели данные!');
       }
