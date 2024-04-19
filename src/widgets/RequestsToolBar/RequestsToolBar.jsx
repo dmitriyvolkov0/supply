@@ -9,7 +9,10 @@ export default function RequestsToolBar() {
     return (
         <Box sx={{display: 'flex', gap: '10px'}}>
             <Button onClick={() => navigate(CREATE_REQUEST_PAGE)} variant="outlined">Создать заявку</Button>
-            <RefreshBut onClick={() => alert(1)}/>
+            <RefreshBut 
+                onClick={() => alert(1)}
+                color="primary"    
+            />
         </Box>
     )
 }

@@ -3,7 +3,7 @@ import CachedIcon from '@mui/icons-material/Cached';
 import { IconButton, Tooltip } from '@mui/material';
 import s from './style.module.css';
 
-export default function RefreshBut({ onClick, title="Обновить информацию" }) {
+export default function RefreshBut({ onClick, color, title="Обновить информацию" }) {
     const [isRotateBut, setIsRotateBut] = React.useState(false);
     const refreshClickHandle = () => {
         onClick && onClick();
@@ -15,7 +15,7 @@ export default function RefreshBut({ onClick, title="Обновить инфор
         <IconButton 
             className={isRotateBut ? s.refreshButActive : ' '}
             onClick={refreshClickHandle} 
-            color="primary" variant="outlined">
+            color={color} variant="outlined">
                 <CachedIcon/>
         </IconButton>
     </Tooltip>
