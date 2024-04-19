@@ -182,7 +182,7 @@ export default function RequestsPage({ user }) {
 
   return (
     <Container>
-      <RequestsToolBar/>
+      <RequestsToolBar getAllRequests={() => getAllRequests(perPage)}/>
       <RequestsTable requests={requests}/>
       <IndicateBalancesModal
         title="Укажите остатки материалов"
