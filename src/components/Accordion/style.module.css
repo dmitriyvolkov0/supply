@@ -1,0 +1,42 @@
+.fieldsWrapper{
+    display: flex;
+    gap: 15px;
+    width: 100%;
+}
+
+.materialNameField{
+    width: 100%;
+}
+
+.countField{
+    max-width: 120px;
+}
+
+.unitField{
+    max-width: 200px;
+}
+
+.filesWrapper{
+}
+
+.filesTitle{
+    font-size: 15px;
+}
+
+.filesInform{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: #777;
+}
+
+.fileItem{
+    display: flex;
+    align-items: center;
+}
+
+.fileItemName{
+    margin: 0;
+    padding-left: 10px;
+}
