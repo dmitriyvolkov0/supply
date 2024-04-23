@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import UserContext from '@contexts/User/UserContext';
 
@@ -6,6 +6,7 @@ import {
   AUTH_PAGE,
   REQUESTS_PAGE,
   CREATE_REQUEST_PAGE,
+  EDIT_REQUEST_PAGE,
   ARCHIVE_PAGE,
   SEARCH_PAGE,
   HISTORY_SINGLE_PAGE
@@ -14,6 +15,7 @@ import {
 import AuthPage from './pages/AuthPage/AuthPage.jsx';
 import RequestsPage from './pages/RequestsPage/RequestsPage.jsx';
 import CreateRequestPage from './pages/CreateRequestPage/CreateRequestPage.jsx';
+import EditRequestPage from './pages/EditRequestPage/EditRequestPage.jsx';
 import ArchivePage from './pages/ArchivePage/ArchivePage.jsx';
 import SearchPage from './pages/SearchPage/SearchPage.jsx';
 import HistoryPage from './pages/HistoryPage/HistoryPage.jsx';
@@ -54,6 +56,12 @@ export default function App() {
             </PrivateRoute>
           }/>
 
+          <Route path={EDIT_REQUEST_PAGE} element={
+            <PrivateRoute navTitle="Редактировать заявку">
+              <EditRequestPage user={user}/>
+            </PrivateRoute>
+          }/>
+
           <Route path={HISTORY_SINGLE_PAGE} element={
             <PrivateRoute navTitle="История">
               <HistoryPage/>
@@ -71,7 +79,7 @@ export default function App() {
               <SearchPage/>
             </PrivateRoute>
           }/>
-          
+
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </Router>
