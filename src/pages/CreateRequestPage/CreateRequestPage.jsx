@@ -47,6 +47,7 @@ export default function CreateRequestPage({ user }) {
           setMaterials={setMaterials}
           title="Создание бланка заявки на стройматериалы"
           emptyMaterial={emptyMaterial}
+          sendFormButTitle="Создать заявку"
         />
       </form>
     </Container>
