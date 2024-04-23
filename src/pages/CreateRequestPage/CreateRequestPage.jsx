@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { Container } from '@mui/material';
 import RequestFields from '@widgets/RequestFields/RequestFields';
 import { createRequest } from '@services/api.js';
+import { serializeFD } from '@utils/helpers/serializeFD.js';
+import { useNavigate } from 'react-router-dom';
 
-export default function CreateRequestPage() {
+export default function CreateRequestPage({ user }) {
   let emptyMaterial = {
     name: 'Название материала', 
     count: 1,
@@ -13,19 +15,27 @@ export default function CreateRequestPage() {
     files: []
   };
 
+  const navigate = useNavigate();
+
   // Наименование объекта
   const [objectName, setObjectName] = useState('');
 
   // Вложенные материалы
   const [materials, setMaterials] = useState([ emptyMaterial ]);
 
-  const submitFormHandle = (e) =>{
+  const submitFormHandle = (e) => {
     e.preventDefault();
-    createRequest(objectName, materials)
-      .then(res => console.log(res))
-      .catch(err => alert('Возникла ошибка!'));
-  }
-    
+
+    const fd = serializeFD({objectName: objectName, userId: user.id, materials: materials});
+    createRequest(fd)
+      .then(res => {
+        if(res.createRequest.status){
+          alert('Заявка успешно создана!');
+          navigate('/');
+        }else{ alert('Возникла ошибка при создании заявки!'); }
+      })
+      .catch(err => console.log('Возникла внутренняя ошибка!'));
+  };
 
   return (
     <Container>
