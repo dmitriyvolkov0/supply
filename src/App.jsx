@@ -6,7 +6,7 @@ import {
   AUTH_PAGE,
   REQUESTS_PAGE,
   CREATE_REQUEST_PAGE,
-  EDIT_REQUEST_PAGE,
+  EDIT_REQUEST_SINGLE_PAGE,
   ARCHIVE_PAGE,
   SEARCH_PAGE,
   HISTORY_SINGLE_PAGE
@@ -56,7 +56,7 @@ export default function App() {
             </PrivateRoute>
           }/>
 
-          <Route path={EDIT_REQUEST_PAGE} element={
+          <Route path={EDIT_REQUEST_SINGLE_PAGE} element={
             <PrivateRoute navTitle="Редактировать заявку">
               <EditRequestPage user={user}/>
             </PrivateRoute>
