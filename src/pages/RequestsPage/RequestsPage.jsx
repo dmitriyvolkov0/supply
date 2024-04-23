@@ -9,11 +9,14 @@ import {
   setStatus, 
   getMaterialsByRequestId, 
   setBalances,
-  getUserByRequestId
+  getUserByRequestId,
+  getWarehouses,
+  setWarehouse
 } from '@services/api.js';
 
 import RequestsTable from '@components/RequestsTable/RequestsTable';
 import IndicateBalancesModal from '@widgets/IndicateBalancesModal/IndicateBalancesModal';
+import SetWarehouseModal from '@widgets/SetWarehouseModal/SetWarehouseModal';
 import RequestsToolBar from '@widgets/RequestsToolBar/RequestsToolBar';
 
 export default function RequestsPage({ user }) {
@@ -25,8 +28,10 @@ export default function RequestsPage({ user }) {
 
   // modals
   const [isModalIndicateBalancesOpen, setIsModalIndicateBalancesOpen] = useState(false); 
+  const [isModalSetWarehouseOpen, setIsModalSetWarehouseOpen] = useState(false); 
   
   const [materials, setMaterials] = useState([]); //Массив материалов, для которых будут указываться остатки
+  const [warehouses, setWarehouses] = useState([]);
 
   // Получить все заявки, доступные пользователю
   const getAllRequests = (count) => {
@@ -190,6 +195,42 @@ export default function RequestsPage({ user }) {
     }
   }
 
+  // Получить список складов
+  const getWarehousesHandle = () => {
+    getWarehouses()
+      .then(res => setWarehouses(res))
+      .catch(err => alert('Возникла внутренняя ошибка!'));
+  }
+
+  // Материалы готовы к выдаче на складе
+  const arrivedInWarehouse = (requestId) => {
+    getWarehousesHandle();
+    setIsModalSetWarehouseOpen([true, requestId]);
+  }
+
+  // Указать на какой склад прибыли материалы
+  const setWarehouseHandle = (requestId, warehouseId) => {
+    setWarehouse(requestId, warehouseId)
+      .then(res => {
+        if(res.status){
+          
+          setStatus(requestId, 8)
+            .then(res => {
+              if(res.status){
+                alert('Склад успешно указан!');
+              }else{
+                alert('Во время обработки заявки произошла ошибка!')
+              }
+            })
+            .catch(err => alert('Возникла внутренняя ошибка!'));
+            
+        }else{
+          alert('Возникла внутренняя ошибка!')
+        }
+      })
+      .catch(err => alert('Возникла внутренняя ошибка!'));
+  }
+
   // Материалы прибыли на объект
   const materialsArrivedObject = (requestId) =>{
     let isHandle = window.confirm("Материалы прибыли на объект?");
@@ -250,7 +291,7 @@ export default function RequestsPage({ user }) {
       confirmAndSendToSnab: confirmAndSendToSnab,
       materialsArrivedWarehouse: materialsArrivedWarehouse,
       materialsArrivedObject: materialsArrivedObject,
-      arrivedInWarehouse: 'arrivedInWarehouse',
+      arrivedInWarehouse: arrivedInWarehouse,
       materialTransferred: materialTransferred,
       inArchive: inArchive
     };
@@ -277,6 +318,13 @@ export default function RequestsPage({ user }) {
         setBalancesHandle={setBalancesHandle}
         isOpen={isModalIndicateBalancesOpen}
         setIsOpen={setIsModalIndicateBalancesOpen}
+      />
+      <SetWarehouseModal
+        title="На какой склад прибыли материалы?"
+        warehouses={warehouses}
+        setWarehouseHandle={setWarehouseHandle}
+        isOpen={isModalSetWarehouseOpen}
+        setIsOpen={setIsModalSetWarehouseOpen}
       />
     </Container>
   )
