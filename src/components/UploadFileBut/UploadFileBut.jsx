@@ -18,11 +18,6 @@ const VisuallyHiddenInput = styled('input')({
 export default function UploadFileBut({ materialIndex, uploadFilesHandle }) {
     const handleFileUpload = (event) => {
         let files = Array.from(event.target.files);
-        files = files.map(file => ({
-            name: file.name,
-            type: file.type,
-            url: URL.createObjectURL(file)
-          }));
         uploadFilesHandle(files, materialIndex);
     };
 
