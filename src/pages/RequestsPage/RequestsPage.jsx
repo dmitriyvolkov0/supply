@@ -128,29 +128,83 @@ export default function RequestsPage({ user }) {
 
   // Принять в обработку (контролёр)
   const handleRequestControl  = (requestId) => {
-    setStatus(requestId, 4)
-      .then(res => {
-        if(res.status){
-          alert('Вы успешно приняли заявку в обработку!');
-        }else{
-          alert('Во время принятия заявки в обработку произошла ошибка!')
-        }
-      })
-      .catch(err => alert('Возникла внутренняя ошибка!'));
+    let isHandle = window.confirm("Принять в обработку?");
+    if(isHandle){
+      setStatus(requestId, 4)
+        .then(res => {
+          if(res.status){
+            alert('Вы успешно приняли заявку в обработку!');
+          }else{
+            alert('Во время принятия заявки в обработку произошла ошибка!')
+          }
+        })
+        .catch(err => alert('Возникла внутренняя ошибка!'));
+    }
   } 
 
   // Подтвердить и отправить снабжению
   const confirmAndSendToSnab  = (requestId) => {
-    setStatus(requestId, 5)
-      .then(res => {
-        if(res.status){
-          alert('Вы успешно подтвердили информацию! Заявка отправлена на обработку снабжению.');
-        }else{
-          alert('Во время обработки заявки произошла ошибка!')
-        }
-      })
-      .catch(err => alert('Возникла внутренняя ошибка!'));
+    let isHandle = window.confirm("Подтвердить информацию и направить её снабжению?");
+    if(isHandle){
+      setStatus(requestId, 5)
+        .then(res => {
+          if(res.status){
+            alert('Вы успешно подтвердили информацию! Заявка отправлена на обработку снабжению.');
+          }else{
+            alert('Во время обработки заявки произошла ошибка!')
+          }
+        })
+        .catch(err => alert('Возникла внутренняя ошибка!'));
+    }
   } 
+
+  // Принять в обработку (снабжение)
+  const handleRequestSnab = (requestId) =>{
+    let isHandle = window.confirm("Принять в обработку?");
+    if(isHandle){
+      setStatus(requestId, 6)
+        .then(res => {
+          if(res.status){
+            alert('Вы успешно приняли заявку в обработку!');
+          }else{
+            alert('Во время принятия заявки в обработку произошла ошибка!')
+          }
+        })
+        .catch(err => alert('Возникла внутренняя ошибка!'));
+    }
+  }
+
+  // Материалы прибыли на склад
+  const materialsArrivedWarehouse = (requestId) =>{
+    let isHandle = window.confirm("Материалы прибыли на склад?");
+    if(isHandle){
+      setStatus(requestId, 7)
+        .then(res => {
+          if(res.status){
+            alert('Заявка успешно обработана!');
+          }else{
+            alert('Во время обработки заявки произошла ошибка!')
+          }
+        })
+        .catch(err => alert('Возникла внутренняя ошибка!'));
+    }
+  }
+
+  // Материалы прибыли на объект
+  const materialsArrivedObject = (requestId) =>{
+    let isHandle = window.confirm("Материалы прибыли на объект?");
+    if(isHandle){
+      setStatus(requestId, 9)
+        .then(res => {
+          if(res.status){
+            alert('Заявка успешно обработана!');
+          }else{
+            alert('Во время обработки заявки произошла ошибка!')
+          }
+        })
+        .catch(err => alert('Возникла внутренняя ошибка!'));
+    }
+  }
 
   
   useEffect(() => {
@@ -159,11 +213,11 @@ export default function RequestsPage({ user }) {
       editRequest: editRequest,
       handleRequestWarehouse: handleRequestWarehouse,
       indicateBalances: indicateBalances,
-      handleRequestSnab: 'handleRequestSnab',
       handleRequestControl: handleRequestControl,
+      handleRequestSnab: handleRequestSnab,
       confirmAndSendToSnab: confirmAndSendToSnab,
-      materialsArrivedWarehouse: 'materialsArrivedWarehouse',
-      materialsArrivedObject: 'materialsArrivedObject',
+      materialsArrivedWarehouse: materialsArrivedWarehouse,
+      materialsArrivedObject: materialsArrivedObject,
       arrivedInWarehouse: 'arrivedInWarehouse',
       materialTransferred: 'materialTransferred',
       inArchive: 'inArchive'
