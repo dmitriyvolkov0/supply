@@ -10,6 +10,8 @@ import TextField from '@mui/material/TextField';
 import UploadFileBut from '@components/UploadFileBut/UploadFileBut';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import CloseIcon from '@mui/icons-material/Close';
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 export default function MaterialsAccordion({ materials, setMaterials }) {
     const deleteMaterial = (index) => {
@@ -88,8 +90,18 @@ export default function MaterialsAccordion({ materials, setMaterials }) {
             {
                 materials && materials.map((item, index) => 
                     <Accordion key={'material-'+index}>
-                        <AccordionSummary sx={{ flexDirection: 'row-reverse', gap: 1}} expandIcon={<ExpandMoreIcon />}>
-                            <Typography>{item.name}</Typography>
+                        <AccordionSummary sx={{ flexDirection: 'row-reverse', gap: 1 }} expandIcon={<ExpandMoreIcon />}>
+                            
+                            <div className={s.accordionTitle}>
+                                <Typography>{item.name}</Typography>
+                                {
+                                    materials.length > 1 &&
+                                        <IconButton onClick={() => deleteMaterial(index)} sx={{marginLeft: 'auto'}}>
+                                            <DeleteIcon sx={{fontSize: '20px'}}/>
+                                        </IconButton>
+                                }
+                            </div>
+                            
                         </AccordionSummary>
 
                         <AccordionDetails>
