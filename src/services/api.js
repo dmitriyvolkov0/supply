@@ -135,3 +135,14 @@ export const getWarehouses = () =>{
         .then(res => res)
         .catch(err => err);
 }
+
+// Указать на какой склад пришли материалы
+export const setWarehouse = (requestId, warehouseId) => {
+    return fetch(apiUrl + `setWarehouse`,{
+        method: 'PUT',
+        body: JSON.stringify({requestId: requestId, warehouseId: warehouseId})
+    })
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err);
+}
