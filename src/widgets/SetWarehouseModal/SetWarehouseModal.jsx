@@ -6,7 +6,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-export default function IndicateBalancesModal({title, warehouses, setWarehouse, isOpen, setIsOpen}) {
+export default function IndicateBalancesModal({title, warehouses, setWarehouseHandle, isOpen, setIsOpen}) {
     const buttons = () => {
         return <>
             <Button onClick={() => setIsOpen(false)}>Отмена</Button>
@@ -22,7 +22,7 @@ export default function IndicateBalancesModal({title, warehouses, setWarehouse, 
 
     const onSubmitForm = () => {
         let requestId = isOpen[1];
-        setWarehouse(requestId, radioValue);
+        setWarehouseHandle(requestId, radioValue);
         handleClose();
     }    
 
