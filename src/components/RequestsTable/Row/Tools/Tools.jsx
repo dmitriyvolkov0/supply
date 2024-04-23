@@ -101,11 +101,19 @@ const UserButtons = ({requestId, statusId}) => {
 }
 
 // Кнопки зав.складом
-const WarehouseButtons = ({requestId, statusId}) => {
+const WarehouseButtons = ({userId, creatorUserId, requestId, statusId}) => {
     const { actions } = useContext(ActionsContext);
     switch (statusId) {
         case 1:
-            return <HandleRequestWarehouseBut onClick={() => actions.handleRequestWarehouse(requestId)}/>
+            return <>
+                {
+                    userId === creatorUserId && <>
+                        <DeleteBut onClick={() => actions.deleteRequest(requestId)}/>
+                        <EditBut onClick={() => actions.editRequest(requestId)}/>
+                    </>
+                }
+                <HandleRequestWarehouseBut onClick={() => actions.handleRequestWarehouse(requestId)}/>
+            </>
         case 2:
             return <IndicateBalancesBut onClick={() => actions.indicateBalances(requestId)}/>
         case 7:
@@ -114,15 +122,22 @@ const WarehouseButtons = ({requestId, statusId}) => {
             return <MaterialTransferredBut onClick={() => actions.materialTransferred(requestId)}/>
         case 9:
             return <MaterialTransferredBut onClick={() => actions.materialTransferred(requestId)}/>
+        case 10:
+            return userId === creatorUserId && <InArchiveBut onClick={() => actions.inArchive(requestId)}/>
         default:
             break;
     }
 }
 
 // Кнопки снабжения
-const SnabButtons = ({ requestId, statusId }) => {
+const SnabButtons = ({ userId, creatorUserId, requestId, statusId }) => {
     const { actions } = useContext(ActionsContext);
     switch (statusId) {
+        case 1:
+            return userId === creatorUserId && <>
+                <DeleteBut onClick={() => actions.deleteRequest(requestId)}/>
+                <EditBut onClick={() => actions.editRequest(requestId)}/>
+            </>
         case 5:
             return <>
                 <EditBut onClick={() => actions.editRequest(requestId)}/> 
@@ -134,6 +149,8 @@ const SnabButtons = ({ requestId, statusId }) => {
                 <MaterialsArrivedWarehouseBut onClick={() => actions.materialsArrivedWarehouse(requestId)}/>
                 <MaterialsArrivedObjectBut onClick={() => actions.materialsArrivedObject(requestId)}/>
             </>
+        case 10:
+            return userId === creatorUserId && <InArchiveBut onClick={() => actions.inArchive(requestId)}/>
     
         default:
             break;
@@ -141,9 +158,14 @@ const SnabButtons = ({ requestId, statusId }) => {
 }
 
 // Кнопки контролёра
-const ControlButtons = ({ requestId, statusId }) => {
+const ControlButtons = ({ userId, creatorUserId, requestId, statusId }) => {
     const { actions } = useContext(ActionsContext);
-    switch (statusId) {
+    switch (statusId) {        
+        case 1:
+            return userId === creatorUserId && <>
+                <DeleteBut onClick={() => actions.deleteRequest(requestId)}/>
+                <EditBut onClick={() => actions.editRequest(requestId)}/>
+            </>
         case 3:
             return <>
                 <HandleRequestControlBut onClick={() => actions.handleRequestControl(requestId)}/>
@@ -153,6 +175,8 @@ const ControlButtons = ({ requestId, statusId }) => {
                 <EditBut onClick={() => actions.editRequest(requestId)}/> 
                 <MaterialsEditControlBut onClick={() => actions.confirmAndSendToSnab(requestId)}/> 
             </>
+        case 10:
+            return userId === creatorUserId && <InArchiveBut onClick={() => actions.inArchive(requestId)}/>
     
         default:
             break;
@@ -163,6 +187,7 @@ const ControlButtons = ({ requestId, statusId }) => {
 export default function Tools({ data, isOpen, setOpen, hideButtons }) {
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
+
     return (
         <>
             <Tooltip title="Развернуть список материалов">
@@ -190,15 +215,29 @@ export default function Tools({ data, isOpen, setOpen, hideButtons }) {
                     }
         
                     {+user.role_id === 3 &&
-                        <WarehouseButtons requestId={+data.id} statusId={+data.status_id}/>
+                        <WarehouseButtons 
+                            userId={user.id}
+                            creatorUserId={data.user_id}
+                            requestId={+data.id} 
+                            statusId={+data.status_id}
+                        />
                     }
         
                     {+user.role_id === 4 &&
-                        <SnabButtons requestId={+data.id} statusId={+data.status_id}/>
+                        <SnabButtons 
+                            userId={user.id}
+                            creatorUserId={data.user_id}
+                            requestId={+data.id} 
+                            statusId={+data.status_id}
+                        />
                     }
         
                     {+user.role_id === 5 &&
-                        <ControlButtons requestId={+data.id} statusId={+data.status_id}/>
+                        <ControlButtons 
+                            userId={user.id}
+                            creatorUserId={data.user_id}
+                            requestId={+data.id} 
+                            statusId={+data.status_id}/>
                     }
                 
                 </>
