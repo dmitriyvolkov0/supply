@@ -6,7 +6,7 @@ import { REQUESTS_PAGE } from '@utils/constants/routes.js';
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Accordion from '@components/Accordion/Accordion';
 
-export default function RequestFields({ title, objectName, setObjectName, materials, setMaterials, emptyMaterial }) {
+export default function RequestFields({ title, objectName, setObjectName, materials, setMaterials, emptyMaterial, sendFormButTitle="Отправить"}) {
     const navigate = useNavigate();
 
     const addMaterial = () => {
@@ -36,7 +36,7 @@ export default function RequestFields({ title, objectName, setObjectName, materi
                 />
                 
                 <div className={s.formButtons}>
-                    <Button type="submit" variant="contained">Создать заявку</Button>
+                    <Button type="submit" variant="contained">{sendFormButTitle}</Button>
                     <Button onClick={addMaterial} variant="contained" color="secondary">Добавить материал</Button>
                 </div>
             </div>
