@@ -7,7 +7,7 @@ import RefreshBut from '@components/RefreshBut/RefreshBut';
 export default function RequestsToolBar({ getAllRequests }) {
     const navigate = useNavigate();
     return (
-        <Box sx={{display: 'flex', gap: '10px'}}>
+        <Box sx={{display: 'flex', gap: '10px', marginBottom: '15px'}}>
             <Button onClick={() => navigate(CREATE_REQUEST_PAGE)} variant="outlined">Создать заявку</Button>
             <RefreshBut 
                 onClick={getAllRequests}
