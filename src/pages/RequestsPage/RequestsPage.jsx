@@ -206,6 +206,22 @@ export default function RequestsPage({ user }) {
     }
   }
 
+  // Материалы выданы / получены
+  const materialTransferred = (requestId) =>{
+    let isHandle = window.confirm("Материалы выданы?");
+    if(isHandle){
+      setStatus(requestId, 10)
+        .then(res => {
+          if(res.status){
+            alert('Заявка успешно обработана!');
+          }else{
+            alert('Во время обработки заявки произошла ошибка!')
+          }
+        })
+        .catch(err => alert('Возникла внутренняя ошибка!'));
+    }
+  }
+
   
   useEffect(() => {
     let actions = {
@@ -219,7 +235,7 @@ export default function RequestsPage({ user }) {
       materialsArrivedWarehouse: materialsArrivedWarehouse,
       materialsArrivedObject: materialsArrivedObject,
       arrivedInWarehouse: 'arrivedInWarehouse',
-      materialTransferred: 'materialTransferred',
+      materialTransferred: materialTransferred,
       inArchive: 'inArchive'
     };
     
