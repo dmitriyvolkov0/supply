@@ -118,10 +118,10 @@ export const getUserByRequestId = (requestId) => {
 }
 
 // Создать заявку
-export const createRequest = (objectName, materials) =>{
+export const createRequest = (requestFormData) =>{
     return fetch(apiUrl + `createRequest`, {
         method: 'POST',
-        body: JSON.stringify({objectName, materials })
+        body: requestFormData
     })
         .then(res => res.json())
         .then(res => res)
