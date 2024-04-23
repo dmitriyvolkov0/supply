@@ -127,3 +127,11 @@ export const createRequest = (requestFormData) =>{
         .then(res => res)
         .catch(err => err);
 }
+
+// Получить склады
+export const getWarehouses = () =>{
+    return fetch(apiUrl + `warehouses`)
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err);
+}
