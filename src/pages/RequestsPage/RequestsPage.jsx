@@ -222,6 +222,22 @@ export default function RequestsPage({ user }) {
     }
   }
 
+  // Переместить в архив
+  const inArchive = (requestId) =>{
+    let isHandle = window.confirm("Переместить в архив?");
+    if(isHandle){
+      setStatus(requestId, 11)
+        .then(res => {
+          if(res.status){
+            alert('Заявка успешно перемещена в архив!');
+          }else{
+            alert('Во время перемещение заявки в архив произошла ошибка!')
+          }
+        })
+        .catch(err => alert('Возникла внутренняя ошибка!'));
+    }
+  }
+
   
   useEffect(() => {
     let actions = {
@@ -236,7 +252,7 @@ export default function RequestsPage({ user }) {
       materialsArrivedObject: materialsArrivedObject,
       arrivedInWarehouse: 'arrivedInWarehouse',
       materialTransferred: materialTransferred,
-      inArchive: 'inArchive'
+      inArchive: inArchive
     };
     
     setActions(actions);
