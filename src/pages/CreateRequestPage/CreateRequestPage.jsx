@@ -34,7 +34,7 @@ export default function CreateRequestPage({ user }) {
           navigate('/');
         }else{ alert('Возникла ошибка при создании заявки!'); }
       })
-      .catch(err => console.log('Возникла внутренняя ошибка!'));
+      .catch(err => alert('Возникла внутренняя ошибка!'));
   };
 
   return (
