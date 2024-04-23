@@ -18,6 +18,7 @@ import RequestsTable from '@components/RequestsTable/RequestsTable';
 import IndicateBalancesModal from '@widgets/IndicateBalancesModal/IndicateBalancesModal';
 import SetWarehouseModal from '@widgets/SetWarehouseModal/SetWarehouseModal';
 import RequestsToolBar from '@widgets/RequestsToolBar/RequestsToolBar';
+import { EDIT_REQUEST_PAGE } from '@utils/constants/routes';
 
 export default function RequestsPage({ user }) {
   const { setActions } = useContext(ActionsContext); //контекст с методами изменения состояния заявки
@@ -57,7 +58,7 @@ export default function RequestsPage({ user }) {
 
   // Изменить заявку
   const editRequest = (requestId) => {
-    console.log('Изменить');
+    navigate(EDIT_REQUEST_PAGE + '/' + requestId);
   }
 
   // Принять в обработку (на складе)
