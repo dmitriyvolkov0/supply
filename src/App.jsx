@@ -41,23 +41,37 @@ export default function App() {
       <Router>
         <Routes>
           <Route path={AUTH_PAGE} element={<AuthPage setUser={ setUser }/>}/>
+
           <Route path={REQUESTS_PAGE} element={
             <PrivateRoute navTitle="Заявки">
               <RequestsPage user={user}/>
             </PrivateRoute>
           }/>
+
           <Route path={CREATE_REQUEST_PAGE} element={
             <PrivateRoute navTitle="Создать заявку">
               <CreateRequestPage user={user}/>
             </PrivateRoute>
           }/>
+
           <Route path={HISTORY_SINGLE_PAGE} element={
             <PrivateRoute navTitle="История">
               <HistoryPage/>
             </PrivateRoute>
           }/>
-          <Route path={ARCHIVE_PAGE} element={<ArchivePage/>}/>
-          <Route path={SEARCH_PAGE} element={<SearchPage/>}/>
+
+          <Route path={ARCHIVE_PAGE} element={
+            <PrivateRoute navTitle="Архив">
+              <ArchivePage/>
+            </PrivateRoute>
+          }/>
+
+          <Route path={SEARCH_PAGE} element={
+            <PrivateRoute navTitle="Поиск">
+              <SearchPage/>
+            </PrivateRoute>
+          }/>
+          
           <Route path="*" element={<NotFound/>}/>
         </Routes>
       </Router>
