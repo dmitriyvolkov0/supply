@@ -7,7 +7,8 @@ import {
   REQUESTS_PAGE,
   CREATE_REQUEST_PAGE,
   ARCHIVE_PAGE,
-  SEARCH_PAGE
+  SEARCH_PAGE,
+  HISTORY_SINGLE_PAGE
 } from './utils/constants/routes.js';
 
 import AuthPage from './pages/AuthPage/AuthPage.jsx';
@@ -15,6 +16,7 @@ import RequestsPage from './pages/RequestsPage/RequestsPage.jsx';
 import CreateRequestPage from './pages/CreateRequestPage/CreateRequestPage.jsx';
 import ArchivePage from './pages/ArchivePage/ArchivePage.jsx';
 import SearchPage from './pages/SearchPage/SearchPage.jsx';
+import HistoryPage from './pages/HistoryPage/HistoryPage.jsx';
 import NotFound from './pages/NotFound/NotFound.jsx';
 
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
@@ -47,6 +49,11 @@ export default function App() {
           <Route path={CREATE_REQUEST_PAGE} element={
             <PrivateRoute navTitle="Создать заявку">
               <CreateRequestPage user={user}/>
+            </PrivateRoute>
+          }/>
+          <Route path={HISTORY_SINGLE_PAGE} element={
+            <PrivateRoute navTitle="История">
+              <HistoryPage/>
             </PrivateRoute>
           }/>
           <Route path={ARCHIVE_PAGE} element={<ArchivePage/>}/>
