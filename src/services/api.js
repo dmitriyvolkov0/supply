@@ -146,3 +146,11 @@ export const setWarehouse = (requestId, warehouseId) => {
         .then(res => res)
         .catch(err => err);
 }
+
+// Получить заявку по id
+export const getRequestById = (requestId) =>{
+    return fetch(apiUrl + `requests/${requestId}`)
+    .then(res => res.json())
+    .then(res => res)
+    .catch(err => err);
+}
