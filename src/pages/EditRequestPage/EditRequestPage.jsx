@@ -6,6 +6,7 @@ import { serializeFD } from '@utils/helpers/serializeFD.js';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { REQUESTS_PAGE } from '@utils/constants/routes.js';
+import RequestSkeleton from '@widgets/RequestSkeleton/RequestSkeleton.jsx';
 
 export default function EditRequestPage({ user }) {
   const navigate = useNavigate();
@@ -64,19 +65,22 @@ export default function EditRequestPage({ user }) {
 
   return (
     <Container>
-      
-      <form onSubmit={submitFormHandle}>
-        <RequestFields
-          objectName={objectName} 
-          setObjectName={setObjectName}
-          materials={materials} 
-          setMaterials={setMaterials}
-          title="Редактирование бланка заявки на стройматериалы"
-          emptyMaterial={emptyMaterial}
-          sendFormButTitle="Сохранить изменения"
-        />
-      </form>
-
+      {
+        materials ?
+          <form onSubmit={submitFormHandle}>
+            <RequestFields
+              objectName={objectName} 
+              setObjectName={setObjectName}
+              materials={materials} 
+              setMaterials={setMaterials}
+              title="Редактирование бланка заявки на стройматериалы"
+              emptyMaterial={emptyMaterial}
+              sendFormButTitle="Сохранить изменения"
+            />
+          </form>
+          :
+          <RequestSkeleton/>
+      }
     </Container>
   )
 }
