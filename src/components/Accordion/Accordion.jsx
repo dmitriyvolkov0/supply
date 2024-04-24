@@ -11,7 +11,7 @@ import UploadFileBut from '@components/UploadFileBut/UploadFileBut';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import DownloadIcon from '@mui/icons-material/Download';
 
 export default function MaterialsAccordion({ materials, setMaterials }) {
     const deleteMaterial = (index) => {
@@ -164,10 +164,13 @@ export default function MaterialsAccordion({ materials, setMaterials }) {
                                     <div className={s.filesWrapper}>
                                         <h3 className={s.filesTitle}>Прикрепленные файлы:</h3>
                                         {
-                                            materials[index].files.map((items, fileIndex) => 
+                                            materials[index].files.map((item, fileIndex) => 
                                                 <div className={s.fileItem} key={'file-' + fileIndex}>
+                                                    <IconButton href={URL.createObjectURL(item)} download>
+                                                        <DownloadIcon/>
+                                                    </IconButton>
                                                     <p className={s.fileItemName}>
-                                                        {items.name}
+                                                        {item.name}
                                                     </p>
                                                     <IconButton onClick={() => deleteUploadFile(index, fileIndex)}>
                                                         <CloseIcon fontSize="small" sx={{color: 'red'}}/>
