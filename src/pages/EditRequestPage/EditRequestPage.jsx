@@ -5,6 +5,7 @@ import { getRequestById, getMaterialsByRequestId } from '@services/api.js';
 import { serializeFD } from '@utils/helpers/serializeFD.js';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { REQUESTS_PAGE } from '@utils/constants/routes.js';
 
 export default function EditRequestPage({ user }) {
   const navigate = useNavigate();
@@ -23,26 +24,47 @@ export default function EditRequestPage({ user }) {
   const [objectName, setObjectName] = useState('');
 
   // Вложенные материалы
-  const [materials, setMaterials] = useState([ emptyMaterial ]);
+  const [materials, setMaterials] = useState(null);
 
-  const submitFormHandle = (e) => {
-    e.preventDefault();
-  };
+  // Получить наименование объекта
+  const getObjectName = () =>{
+    getRequestById(requestId)
+    .then(res => {
+      if(res.status){
+        setObjectName(res.data.text);
+      }else{
+        alert('Возникла ошибка при получении данных заявки!');
+      }
+    })
+    .catch(err => {
+      alert('Возникла внутренняя ошибка! Возможно такой заявки не существует!')
+      navigate(REQUESTS_PAGE);
+    });
+  }
 
-  // TODO: доделать вывод фалов и сохранение измененной заявки
-  useEffect(() => {
+  // Получить материалы текущей заявки
+  const getMaterials = () =>{
     getMaterialsByRequestId(requestId)
       .then(res => {
         let obj = res.map(item => ({...item, count: item.quantity}));
         setMaterials(obj);
       })
       .catch(err => alert('Возникла внутренняя ошибка!'));
-  }, []);
+  }
 
-  console.log(materials);
+  // Сохранить изменения
+  const submitFormHandle = (e) => {
+    e.preventDefault();
+  };
+
+  useEffect(() => {
+    getObjectName();
+    getMaterials();
+  }, []);
 
   return (
     <Container>
+      
       <form onSubmit={submitFormHandle}>
         <RequestFields
           objectName={objectName} 
@@ -54,6 +76,7 @@ export default function EditRequestPage({ user }) {
           sendFormButTitle="Сохранить изменения"
         />
       </form>
+
     </Container>
   )
 }
