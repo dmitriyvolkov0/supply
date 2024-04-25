@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import RequestFields from '@widgets/RequestFields/RequestFields';
 import RequestSkeleton from '@widgets/RequestSkeleton/RequestSkeleton.jsx';
 
-import { getRequestById, getMaterialsByRequestId, getFilesByMaterialId, saveRequest } from '@services/api.js';
+import { getRequestById, getMaterialsByRequestId, getFilesByMaterialId, saveRequest, addHistoryItem } from '@services/api.js';
 import { serializeFD } from '@utils/helpers/serializeFD.js';
 import { REQUESTS_PAGE } from '@utils/constants/routes.js';
 import { b64toBlob } from '@utils/helpers/base64ToBlob.js';
@@ -95,6 +95,7 @@ export default function EditRequestPage({ user }) {
       .then(res => {
         if(res.status){
           alert('Изменения успешно сохранены!');
+          addHistoryItem(requestId, 12, user.id);
         }else{
           alert('Во время сохранения изменений произошла ошибка!');
         }
