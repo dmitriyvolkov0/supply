@@ -142,9 +142,9 @@ export const setWarehouse = (requestId, warehouseId) => {
         method: 'PUT',
         body: JSON.stringify({requestId: requestId, warehouseId: warehouseId})
     })
-        .then(res => res.json())
-        .then(res => res)
-        .catch(err => err);
+    .then(res => res.json())
+    .then(res => res)
+    .catch(err => err);
 }
 
 // Получить заявку по id
@@ -158,7 +158,18 @@ export const getRequestById = (requestId) =>{
 // Получить файл по id материала
 export const getFilesByMaterialId = (materialId) => {
     return fetch(apiUrl + `files?materialId=${materialId}`)
-        .then(res => res.json())
-        .then(res => res)
-        .catch(err => err);
+    .then(res => res.json())
+    .then(res => res)
+    .catch(err => err);
+}
+
+// Функция сохранения изменений заявки
+export const saveRequest = (requestFormData) =>{
+    return fetch(apiUrl + `saveRequest`, {
+        method: 'POST',
+        body: requestFormData
+    })
+    .then(res => res.json())
+    .then(res => res)
+    .catch(err => err);
 }
