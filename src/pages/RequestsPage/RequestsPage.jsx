@@ -11,7 +11,8 @@ import {
   setBalances,
   getUserByRequestId,
   getWarehouses,
-  setWarehouse
+  setWarehouse,
+  addHistoryItem
 } from '@services/api.js';
 
 import RequestsTable from '@widgets/RequestsTable/RequestsTable';
@@ -48,6 +49,7 @@ export default function RequestsPage({ user }) {
       .then(res => {
         if(res.status){
           alert('Заявка успешно удалена!');
+          addHistoryItem(requestId, 13, user.id);
         }else{
           alert('При удалении заявки возникла ошибка!');
         }
