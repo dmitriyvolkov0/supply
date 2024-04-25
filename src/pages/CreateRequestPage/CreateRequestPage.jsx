@@ -4,6 +4,7 @@ import RequestFields from '@widgets/RequestFields/RequestFields';
 import { createRequest } from '@services/api.js';
 import { serializeFD } from '@utils/helpers/serializeFD.js';
 import { useNavigate } from 'react-router-dom';
+import { REQUESTS_PAGE } from '@utils/constants/routes.js';
 
 export default function CreateRequestPage({ user }) {
   let emptyMaterial = {
@@ -31,7 +32,7 @@ export default function CreateRequestPage({ user }) {
       .then(res => {
         if(res.createRequest.status){
           alert('Заявка успешно создана!');
-          navigate('/');
+          navigate(REQUESTS_PAGE);
         }else{ alert('Возникла ошибка при создании заявки!'); }
       })
       .catch(err => alert('Возникла внутренняя ошибка!'));
