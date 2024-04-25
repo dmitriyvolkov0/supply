@@ -161,6 +161,7 @@ export default function RequestsPage({ user }) {
         .then(res => {
           if(res.status){
             alert('Вы успешно подтвердили информацию! Заявка отправлена на обработку снабжению.');
+            addHistoryItem(requestId, 5, user.id);
           }else{
             alert('Во время обработки заявки произошла ошибка!')
           }
