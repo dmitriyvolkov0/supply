@@ -3,7 +3,6 @@ import { Container } from '@mui/material';
 import HistoryTable from '@widgets/HistoryTable/HistoryTable';
 import { useParams } from 'react-router-dom';
 import TitleBack from '@components/TitleBack/TitleBack';
-import { REQUESTS_PAGE } from '@utils/constants/routes.js';
 import RefreshBut from '@components/RefreshBut/RefreshBut';
 import Box from '@mui/material/Box';
 
@@ -33,7 +32,7 @@ export default function HistoryPage() {
   return (
     <Container>
       <Box sx={{display: 'flex', justifyContent:'space-between', alignItems: 'center'}}>
-        <TitleBack title={"Заявка №" + requestId} link={REQUESTS_PAGE}/>
+        <TitleBack title={"Заявка №" + requestId} link={-1}/>
         <RefreshBut onClick={getHistoryByRequestIdHandle} size={32}/>
       </Box>
       <HistoryTable history={history}/>
