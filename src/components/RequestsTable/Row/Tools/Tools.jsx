@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 
+import { HISTORY_PAGE } from '@utils/constants/routes.js';
+
 // icons
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -202,7 +204,7 @@ export default function Tools({ data, isOpen, setOpen, hideButtons }) {
             <Tooltip title="История">
                 <IconButton
                     size="small"
-                    // onClick={() => navigate(`${HISTORY_PAGE + data.blank_id}`)}
+                    onClick={() => navigate(`${HISTORY_PAGE + data.id}`)}
                 >
                     <HistoryIcon/>
                 </IconButton>
