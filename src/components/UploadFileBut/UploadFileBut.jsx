@@ -15,7 +15,7 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-export default function UploadFileBut({ materialIndex, uploadFilesHandle }) {
+export default function UploadFileBut({ materialIndex, uploadFilesHandle, disableAddFileBut }) {
     const handleFileUpload = (event) => {
         let files = Array.from(event.target.files);
         uploadFilesHandle(files, materialIndex);
@@ -30,6 +30,7 @@ export default function UploadFileBut({ materialIndex, uploadFilesHandle }) {
                 tabIndex={-1}
                 sx={{marginTop: '10px'}}
                 startIcon={<CloudUploadIcon />}
+                disabled={disableAddFileBut}
                 >
                     Прикрепить файлы
                     <VisuallyHiddenInput type="file" multiple onChange={handleFileUpload} />

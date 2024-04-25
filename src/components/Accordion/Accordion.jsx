@@ -13,7 +13,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DownloadIcon from '@mui/icons-material/Download';
 
-export default function MaterialsAccordion({ materials, setMaterials }) {
+export default function MaterialsAccordion({ materials, setMaterials, disableAddFileBut }) {
     const deleteMaterial = (index) => {
         const newMaterials = [...materials];
         newMaterials.splice(index, 1);
@@ -155,6 +155,7 @@ export default function MaterialsAccordion({ materials, setMaterials }) {
                             <UploadFileBut 
                                 materialIndex={index}
                                 uploadFilesHandle={uploadFilesHandle}
+                                disableAddFileBut={disableAddFileBut}
                             />
 
 
