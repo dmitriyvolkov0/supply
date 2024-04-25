@@ -154,3 +154,11 @@ export const getRequestById = (requestId) =>{
     .then(res => res)
     .catch(err => err);
 }
+
+// Получить файл по id материала
+export const getFilesByMaterialId = (materialId) => {
+    return fetch(apiUrl + `files?materialId=${materialId}`)
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err);
+}
