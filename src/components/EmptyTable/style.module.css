@@ -1,0 +1,23 @@
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    left:0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+.title{
+    font-size: 25px;
+    color: #777;
+    font-weight: 500;
+}
+
+.icon{
+    color: #777;
+    font-size: 60px;
+}
