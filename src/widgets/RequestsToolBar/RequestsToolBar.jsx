@@ -8,7 +8,7 @@ import s from './style.module.css';
 export default function RequestsToolBar({ getAllRequests }) {
     const navigate = useNavigate();
     return (
-        <div class={s.wrapper}>
+        <div className={s.wrapper}>
             <Button onClick={() => navigate(CREATE_REQUEST_PAGE)} variant="outlined">Создать заявку</Button>
             <RefreshBut 
                 onClick={getAllRequests}
