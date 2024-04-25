@@ -14,7 +14,7 @@ import {
   setWarehouse
 } from '@services/api.js';
 
-import RequestsTable from '@components/RequestsTable/RequestsTable';
+import RequestsTable from '@widgets/RequestsTable/RequestsTable';
 import IndicateBalancesModal from '@widgets/IndicateBalancesModal/IndicateBalancesModal';
 import SetWarehouseModal from '@widgets/SetWarehouseModal/SetWarehouseModal';
 import RequestsToolBar from '@widgets/RequestsToolBar/RequestsToolBar';
