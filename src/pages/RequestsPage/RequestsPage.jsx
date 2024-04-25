@@ -108,6 +108,7 @@ export default function RequestsPage({ user }) {
               .then(res => {
                 if(res.status){
                   alert('Остатки успешно указаны!');
+                  addHistoryItem(requestId, 3, user.id);
                   setIsModalIndicateBalancesOpen(false);
                 }else{
                   alert('Возникла ошибка при указании остатков!');
