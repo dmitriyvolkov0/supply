@@ -173,3 +173,11 @@ export const saveRequest = (requestFormData) =>{
     .then(res => res)
     .catch(err => err);
 }
+
+// Функция получения истории изменений заявки по её id
+export const getHistoryByRequestId = (requestId) => {
+    return fetch(apiUrl + `history?requestId=${requestId}`)
+    .then(res => res.json())
+    .then(res => res)
+    .catch(err => err);
+}
