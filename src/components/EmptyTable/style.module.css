@@ -19,5 +19,5 @@
 
 .icon{
     color: #777;
-    font-size: 60px;
+    font-size: 60px !important;
 }
