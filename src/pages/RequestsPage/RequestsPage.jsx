@@ -178,6 +178,7 @@ export default function RequestsPage({ user }) {
         .then(res => {
           if(res.status){
             alert('Вы успешно приняли заявку в обработку!');
+            addHistoryItem(requestId, 6, user.id);
           }else{
             alert('Во время принятия заявки в обработку произошла ошибка!')
           }
