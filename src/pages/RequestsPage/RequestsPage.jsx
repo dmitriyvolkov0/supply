@@ -227,6 +227,7 @@ export default function RequestsPage({ user }) {
             .then(res => {
               if(res.status){
                 alert('Склад успешно указан!');
+                addHistoryItem(requestId, 9, user.id);
               }else{
                 alert('Во время обработки заявки произошла ошибка!')
               }
@@ -248,6 +249,7 @@ export default function RequestsPage({ user }) {
         .then(res => {
           if(res.status){
             alert('Заявка успешно обработана!');
+            addHistoryItem(requestId, 8, user.id);
           }else{
             alert('Во время обработки заявки произошла ошибка!')
           }
@@ -264,6 +266,7 @@ export default function RequestsPage({ user }) {
         .then(res => {
           if(res.status){
             alert('Заявка успешно обработана!');
+            addHistoryItem(requestId, 10, user.id);
           }else{
             alert('Во время обработки заявки произошла ошибка!')
           }
@@ -280,6 +283,7 @@ export default function RequestsPage({ user }) {
         .then(res => {
           if(res.status){
             alert('Заявка успешно перемещена в архив!');
+            addHistoryItem(requestId, 11, user.id);
           }else{
             alert('Во время перемещение заявки в архив произошла ошибка!')
           }
