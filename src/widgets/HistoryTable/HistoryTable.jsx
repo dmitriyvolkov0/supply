@@ -9,7 +9,7 @@ import Paper from '@mui/material/Paper';
 import Preloader from '@components/Preloader/Preloader';
 import EmptyTable from '@components/EmptyTable/EmptyTable';
 
-import { getFullDateByStrFromDb } from '../../utils/helpers/timeFunctions.js';
+import { getFullDateByStrFromDb } from '@utils/helpers/timeFunctions.js';
 
 export default function HistoryTable({ history }) {
     return (
