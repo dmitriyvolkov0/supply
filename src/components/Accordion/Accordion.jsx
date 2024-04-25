@@ -173,8 +173,11 @@ export default function MaterialsAccordion({ materials, setMaterials, disableAdd
                                                     <p className={s.fileItemName}>
                                                         {item.name}
                                                     </p>
-                                                    <IconButton onClick={() => deleteUploadFile(index, fileIndex)}>
-                                                        <CloseIcon fontSize="small" sx={{color: 'red'}}/>
+                                                    <IconButton disabled={disableAddFileBut} onClick={() => deleteUploadFile(index, fileIndex)}>
+                                                        <CloseIcon 
+                                                            disabled={disableAddFileBut} 
+                                                            fontSize="small" 
+                                                            sx={disableAddFileBut ? {} : {color: 'red'}}/>
                                                     </IconButton>
                                                 </div>
                                             )
