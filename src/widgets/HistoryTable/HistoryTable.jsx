@@ -9,12 +9,15 @@ import Paper from '@mui/material/Paper';
 import Preloader from '@components/Preloader/Preloader';
 import EmptyTable from '@components/EmptyTable/EmptyTable';
 
+import { getFullDateByStrFromDb } from '../../utils/helpers/timeFunctions.js';
+
 export default function HistoryTable({ history }) {
     return (
         <>
             { history === null && <Preloader/> }
-            { history && history.length === 0 && <EmptyTable/> }
+            { history && history.length === 0 && <EmptyTable title="История для данной заявки не найдена!"/> }
             { history && history.length > 0 && 
+                
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
@@ -26,27 +29,20 @@ export default function HistoryTable({ history }) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            <TableRow>
-                                <TableCell>1</TableCell>
-                                <TableCell>Заявка создана</TableCell>
-                                <TableCell>Андреев Андрей Андреевич</TableCell>
-                                <TableCell>18.04.2024 11:42:45</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell>1</TableCell>
-                                <TableCell>Заявка создана</TableCell>
-                                <TableCell>Андреев Андрей Андреевич</TableCell>
-                                <TableCell>18.04.2024 11:42:45</TableCell>
-                            </TableRow>
-                            <TableRow>
-                                <TableCell>1</TableCell>
-                                <TableCell>Заявка создана</TableCell>
-                                <TableCell>Андреев Андрей Андреевич</TableCell>
-                                <TableCell>18.04.2024 11:42:45</TableCell>
-                            </TableRow>
+                            {
+                                history.map((item, index) => 
+                                    <TableRow key={'history-'+index}>
+                                        <TableCell>{index+1}</TableCell>
+                                        <TableCell>{item.status_name}</TableCell>
+                                        <TableCell>{item.user_name}</TableCell>
+                                        <TableCell>{getFullDateByStrFromDb(item.created_at)}</TableCell>
+                                    </TableRow>
+                                )
+                            }
                         </TableBody>
                     </Table>
                 </TableContainer>
+                
             }
         </>
     );
