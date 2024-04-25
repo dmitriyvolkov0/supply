@@ -181,3 +181,14 @@ export const getHistoryByRequestId = (requestId) => {
     .then(res => res)
     .catch(err => err);
 }
+
+// Добавить запись в историю
+export const addHistoryItem = (requestId, statusId, userId) =>{
+    return fetch(apiUrl + `addHistoryItem`, {
+        method: 'POST',
+        body: JSON.stringify({requestId: requestId, statusId: statusId, userId: userId})
+    })
+    .then(res => res.json())
+    .then(res => res)
+    .catch(err => err);
+}
