@@ -1,0 +1,11 @@
+.title{
+    color: #777;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.titleWrapper{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
