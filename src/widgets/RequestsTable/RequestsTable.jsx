@@ -10,9 +10,15 @@ import Paper from '@mui/material/Paper';
 
 import Row from './Row/Row';
 
+import Preloader from '@components/Preloader/Preloader';
+import EmptyTable from '@components/EmptyTable/EmptyTable';
+
 export default function RequestsTable({ requests, hideButtons }) {
   return (
     <>
+      { requests === null && <Preloader/>}
+      { requests && requests.length === 0 && <EmptyTable/> }
+      { requests && requests.length > 0 && 
         <TableContainer component={Paper}>
           <Table aria-label="collapsible table">
             <TableHead>
@@ -35,6 +41,7 @@ export default function RequestsTable({ requests, hideButtons }) {
             </TableBody>
           </Table>
         </TableContainer> 
+      }
     </>
   );
 }
