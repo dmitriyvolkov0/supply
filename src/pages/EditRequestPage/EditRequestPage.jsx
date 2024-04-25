@@ -6,10 +6,13 @@ import { useParams } from 'react-router-dom';
 import RequestFields from '@widgets/RequestFields/RequestFields';
 import RequestSkeleton from '@widgets/RequestSkeleton/RequestSkeleton.jsx';
 
-import { getRequestById, getMaterialsByRequestId, getFilesByMaterialId } from '@services/api.js';
+import { getRequestById, getMaterialsByRequestId, getFilesByMaterialId, saveRequest } from '@services/api.js';
 import { serializeFD } from '@utils/helpers/serializeFD.js';
 import { REQUESTS_PAGE } from '@utils/constants/routes.js';
 import { b64toBlob } from '@utils/helpers/base64ToBlob.js';
+
+import {IconButton} from '@mui/material';
+import { CloseSharp } from '@mui/icons-material';
 
 export default function EditRequestPage({ user }) {
   const navigate = useNavigate();
@@ -67,7 +70,6 @@ export default function EditRequestPage({ user }) {
 
       getFilesByMaterialId(materialId)
         .then(data => {
-          console.log(data);
           let currentMaterialIndex = materials.findIndex(item => +item.id === +materialId);
   
           let newMaterials = materials;
@@ -90,6 +92,18 @@ export default function EditRequestPage({ user }) {
   // Сохранить изменения
   const submitFormHandle = (e) => {
     e.preventDefault();
+    const requestFormData = serializeFD({requestId: requestId, objectName: objectName, materials: materials});
+
+    saveRequest(requestFormData)
+      .then(res => {
+        if(res.status){
+          alert('Изменения успешно сохранены!');
+        }else{
+          alert('Во время сохранения изменений произошла ошибка!');
+        }
+      })
+      .catch(err => alert('Возникла внутренняя ошибка!'))
+      .finally(() => navigate(REQUESTS_PAGE));
   };
 
   useEffect(() => {
@@ -113,6 +127,7 @@ export default function EditRequestPage({ user }) {
               title="Редактирование бланка заявки на стройматериалы"
               emptyMaterial={emptyMaterial}
               sendFormButTitle="Сохранить изменения"
+              disableAddFileBut={true}
             />
           </form>
           :
