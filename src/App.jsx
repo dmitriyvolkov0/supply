@@ -70,7 +70,7 @@ export default function App() {
 
           <Route path={ARCHIVE_PAGE} element={
             <PrivateRoute navTitle="Архив">
-              <ArchivePage/>
+              <ArchivePage user={user}/>
             </PrivateRoute>
           }/>
 
