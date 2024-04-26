@@ -11,7 +11,7 @@ import { getUserRequests } from '@services/api.js';
 
 export default function SearchPage({ user }) {
   const [requests, setRequests] = useState(null);
-  const [perPage, setPerPage] = useState(5);
+  const [perPage, setPerPage] = useState(10);
   const [files, setFiles] = useState(null); //Вложения
   const [isModalFilesOpen, setIsModaFilesOpen] = useState(false);
   
