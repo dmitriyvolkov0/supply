@@ -34,7 +34,6 @@ export default function SubTable({ requestId, isOpen }) {
 
     // Получить файлы для каждого материала
     const getFiles = () =>{
-        let err = 0;
         materialsList && materialsList.map((item, index) => {
             let filesArr = [];
             getFilesByMaterialId(item.id)
