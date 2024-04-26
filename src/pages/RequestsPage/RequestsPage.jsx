@@ -25,12 +25,14 @@ import FilesModal from '@widgets/FilesModal/FilesModal';
 
 import { EDIT_REQUEST_PAGE } from '@utils/constants/routes';
 
+import LazyLoadingBut from '@components/LazyLoadingBut/LazyLoadingBut';
+
 export default function RequestsPage({ user }) {
   const { setActions } = useContext(ActionsContext); //контекст с методами изменения состояния заявки
   const navigate = useNavigate();
 
   const [requests, setRequests] = useState(null);
-  const [perPage, setPerPage] = useState(10);
+  const [perPage, setPerPage] = useState(5);
 
   // modals
   const [isModalIndicateBalancesOpen, setIsModalIndicateBalancesOpen] = useState(false); 
@@ -358,6 +360,12 @@ export default function RequestsPage({ user }) {
         isOpen={isModalFilesOpen}
         setIsOpen={setIsModaFilesOpen}
       />
+
+      <LazyLoadingBut
+        requests={requests}
+        perPage={perPage}
+        setPerPage={setPerPage}/>
+      
     </Container>
   )
 }
