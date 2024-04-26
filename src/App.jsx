@@ -9,7 +9,8 @@ import {
   EDIT_REQUEST_SINGLE_PAGE,
   ARCHIVE_PAGE,
   SEARCH_PAGE,
-  HISTORY_SINGLE_PAGE
+  HISTORY_SINGLE_PAGE,
+  PROFILE_PAGE
 } from './utils/constants/routes.js';
 
 import AuthPage from './pages/AuthPage/AuthPage.jsx';
@@ -19,6 +20,7 @@ import EditRequestPage from './pages/EditRequestPage/EditRequestPage.jsx';
 import ArchivePage from './pages/ArchivePage/ArchivePage.jsx';
 import SearchPage from './pages/SearchPage/SearchPage.jsx';
 import HistoryPage from './pages/HistoryPage/HistoryPage.jsx';
+import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
 import NotFound from './pages/NotFound/NotFound.jsx';
 
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
@@ -77,6 +79,12 @@ export default function App() {
           <Route path={SEARCH_PAGE} element={
             <PrivateRoute navTitle="Поиск">
               <SearchPage user={user}/>
+            </PrivateRoute>
+          }/>
+
+          <Route path={PROFILE_PAGE} element={
+            <PrivateRoute navTitle="Мой профиль">
+              <ProfilePage user={user}/>
             </PrivateRoute>
           }/>
 
