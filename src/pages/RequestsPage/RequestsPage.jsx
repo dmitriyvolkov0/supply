@@ -16,9 +16,13 @@ import {
 } from '@services/api.js';
 
 import RequestsTable from '@widgets/RequestsTable/RequestsTable';
+import RequestsToolBar from '@widgets/RequestsToolBar/RequestsToolBar';
+
+// modals
 import IndicateBalancesModal from '@widgets/IndicateBalancesModal/IndicateBalancesModal';
 import SetWarehouseModal from '@widgets/SetWarehouseModal/SetWarehouseModal';
-import RequestsToolBar from '@widgets/RequestsToolBar/RequestsToolBar';
+import FilesModal from '@widgets/FilesModal/FilesModal';
+
 import { EDIT_REQUEST_PAGE } from '@utils/constants/routes';
 
 export default function RequestsPage({ user }) {
@@ -31,9 +35,12 @@ export default function RequestsPage({ user }) {
   // modals
   const [isModalIndicateBalancesOpen, setIsModalIndicateBalancesOpen] = useState(false); 
   const [isModalSetWarehouseOpen, setIsModalSetWarehouseOpen] = useState(false); 
+  const [isModalFilesOpen, setIsModaFilesOpen] = useState(false); 
   
   const [materials, setMaterials] = useState([]); //Массив материалов, для которых будут указываться остатки
   const [warehouses, setWarehouses] = useState([]);
+
+  const [files, setFiles] = useState(null); //Вложения
 
   // Получить все заявки, доступные пользователю
   const getAllRequests = (count) => {
@@ -292,6 +299,11 @@ export default function RequestsPage({ user }) {
     }
   }
 
+  // Открыть модальное окно просмотра вложений
+  const showFilesModal = (files) => {
+    setIsModaFilesOpen(true);
+    setFiles(files);
+  }
   
   useEffect(() => {
     let actions = {
@@ -306,7 +318,8 @@ export default function RequestsPage({ user }) {
       materialsArrivedObject: materialsArrivedObject,
       arrivedInWarehouse: arrivedInWarehouse,
       materialTransferred: materialTransferred,
-      inArchive: inArchive
+      inArchive: inArchive,
+      showFilesModal: showFilesModal
     };
     
     setActions(actions);
@@ -338,6 +351,12 @@ export default function RequestsPage({ user }) {
         setWarehouseHandle={setWarehouseHandle}
         isOpen={isModalSetWarehouseOpen}
         setIsOpen={setIsModalSetWarehouseOpen}
+      />
+      <FilesModal
+        title="Вложения"
+        files={files}
+        isOpen={isModalFilesOpen}
+        setIsOpen={setIsModaFilesOpen}
       />
     </Container>
   )

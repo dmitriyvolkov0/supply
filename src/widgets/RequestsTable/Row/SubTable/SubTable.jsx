@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import ActionsContext from '@contexts/Actions/ActionsContext';
 
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
@@ -15,16 +16,41 @@ import RefreshBut from '@components/RefreshBut/RefreshBut';
 // icons
 import IconButton from '@mui/material/IconButton';
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
+import SummarizeIcon from '@mui/icons-material/Summarize';
+import { b64toBlob } from '@utils/helpers/base64ToBlob.js';
 
-import { getMaterialsByRequestId } from '@services/api.js';
+import { getMaterialsByRequestId, getFilesByMaterialId } from '@services/api.js';
+import { Tooltip } from '@mui/material';
 
 export default function SubTable({ requestId, isOpen }) {
-
+    const { actions } = useContext(ActionsContext);
     const [materialsList, setMaterialsList] = useState(null);
 
+    // Получить материалы
     const getMaterials = () =>
         getMaterialsByRequestId(requestId)
-            .then(res => Array.isArray(res) && setMaterialsList(res));
+            .then(res => Array.isArray(res) && setMaterialsList(res))
+            .then(() => getFiles());
+
+    // Получить файлы для каждого материала
+    const getFiles = () =>{
+        materialsList && materialsList.map((item, index) => {
+            let filesArr = [];
+            getFilesByMaterialId(item.id)
+                .then(files => {
+                    files.map(file => {
+                        const blob = b64toBlob(file.content, file.type); //Преобразовываем полученные файлы в File
+                        const fileObject = new File([blob], file.name, { type: file.type });
+                        filesArr.push(fileObject);
+                    });
+                })
+                .then(() => {
+                    materialsList[index].files = filesArr;
+                    setMaterialsList([...materialsList]);
+                })
+                .catch(err => alert('Ошибка получения вложений!'));
+        })
+    }
 
     useEffect(() => {
         isOpen && getMaterials();
@@ -76,11 +102,33 @@ export default function SubTable({ requestId, isOpen }) {
                                                         {data.note}
                                                     </TableCell>
                                                     <TableCell align="right">
-                                                        <IconButton disabled={data.link.trim().length === 0 ? true : false}>
-                                                            <Link to={data.link} target="_blank">
-                                                                <InsertLinkIcon/>
-                                                            </Link>
-                                                        </IconButton>  
+                                                        {
+                                                            data.link.trim().length > 0 ?
+                                                                <Tooltip title="Ссылка">
+                                                                    <Link to={data.link} target="_blank">
+                                                                        <IconButton color="primary">
+                                                                                <InsertLinkIcon/>
+                                                                        </IconButton>  
+                                                                    </Link>
+                                                                </Tooltip>
+                                                            :
+                                                                <IconButton disabled>
+                                                                        <InsertLinkIcon/>
+                                                                </IconButton>  
+                                                                
+                                                        }
+
+                                                        { data.files && data.files.length > 0 ?
+                                                                <Tooltip title="Вложения">
+                                                                    <IconButton onClick={() => actions.showFilesModal(data.files)} color="primary">
+                                                                        <SummarizeIcon/>
+                                                                    </IconButton> 
+                                                                </Tooltip>    
+                                                            :
+                                                                <IconButton disabled>
+                                                                    <SummarizeIcon/>
+                                                                </IconButton> 
+                                                        }
                                                     </TableCell>
                                                 </TableRow>
                                             )
