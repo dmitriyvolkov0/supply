@@ -4,8 +4,12 @@ import s from './style.module.css';
 import Avatar from '@mui/material/Avatar';
 import { blue } from '@mui/material/colors';
 import { Button, Typography, Tooltip } from '@mui/material';
+import { PROFILE_PAGE } from '@utils/constants/routes';
+import { useNavigate } from 'react-router-dom';
 
 export default function AccountWindow({user, setUser, accountWindowWrapperRef, firstLetters}) {
+    const navigate = useNavigate();
+    
     const logout = () => {
         localStorage.removeItem('supplyToken');
         setUser(false);
@@ -26,7 +30,10 @@ export default function AccountWindow({user, setUser, accountWindowWrapperRef, f
                     <p className={s.userRole}>{user.role_name}</p>
                 </Tooltip>
 
-                <Button onClick={logout} className={s.logoutBut} variant='outlined'>Выйти</Button>
+                <div className={s.buttonsWrapper}>
+                    <Button onClick={() => navigate(PROFILE_PAGE)} className={s.logoutBut} variant='outlined'>Открыть профиль</Button>
+                    <Button onClick={logout} className={s.logoutBut} variant='outlined'>Выйти</Button>
+                </div>
             </div>
         </div>
     )
