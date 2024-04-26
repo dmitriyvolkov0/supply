@@ -34,6 +34,7 @@ export default function SubTable({ requestId, isOpen }) {
 
     // Получить файлы для каждого материала
     const getFiles = () =>{
+        let err = 0;
         materialsList && materialsList.map((item, index) => {
             let filesArr = [];
             getFilesByMaterialId(item.id)
@@ -48,8 +49,8 @@ export default function SubTable({ requestId, isOpen }) {
                     materialsList[index].files = filesArr;
                     setMaterialsList([...materialsList]);
                 })
-                .catch(err => alert('Ошибка получения вложений!'));
-        })
+                .catch(err => console.log('Ошибка получения вложений!'));
+        });
     }
 
     useEffect(() => {
