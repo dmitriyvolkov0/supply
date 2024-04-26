@@ -1,7 +1,10 @@
-import React from 'react'
+import React from 'react';
+import MainLayout from '@layouts/MainLayout';
 
 export default function ProfilePage() {
   return (
-    <div>ProfilePage</div>
+    <MainLayout>
+        asasd
+    </MainLayout>
   )
 }
