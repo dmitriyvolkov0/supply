@@ -76,7 +76,7 @@ export default function App() {
 
           <Route path={SEARCH_PAGE} element={
             <PrivateRoute navTitle="Поиск">
-              <SearchPage/>
+              <SearchPage user={user}/>
             </PrivateRoute>
           }/>
 
