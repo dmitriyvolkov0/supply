@@ -56,7 +56,7 @@ export default function SearchPage({ user }) {
 
     useEffect(() => {
         getFilteredRequests();
-    }, [perPage, searchValue, startDate, endDate, division])
+    }, [requests, perPage, searchValue, startDate, endDate, division])
 
 
   return (
