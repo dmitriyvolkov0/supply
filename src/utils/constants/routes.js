@@ -7,4 +7,5 @@ export const ARCHIVE_PAGE = '/archive';
 export const SEARCH_PAGE = '/search';
 export const HISTORY_PAGE = '/history/';
 export const HISTORY_SINGLE_PAGE = '/history/:requestId';
+export const PROFILE_PAGE = '/profile';
 export const ADMIN_PAGE = '/admin';
