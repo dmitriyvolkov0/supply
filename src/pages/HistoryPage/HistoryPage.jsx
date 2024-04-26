@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from '@mui/material';
+import MainLayout from '@layouts/MainLayout';
 import HistoryTable from '@widgets/HistoryTable/HistoryTable';
 import { useParams } from 'react-router-dom';
 import TitleBack from '@components/TitleBack/TitleBack';
@@ -30,12 +30,12 @@ export default function HistoryPage() {
   }, [])
   
   return (
-    <Container>
+    <MainLayout>
       <Box sx={{display: 'flex', justifyContent:'space-between', alignItems: 'center'}}>
         <TitleBack title={"Заявка №" + requestId} link={-1}/>
         <RefreshBut onClick={getHistoryByRequestIdHandle} size={32}/>
       </Box>
       <HistoryTable history={history}/>
-    </Container>
+    </MainLayout>
   )
 }

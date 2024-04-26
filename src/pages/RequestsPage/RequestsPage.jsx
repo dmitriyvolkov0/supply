@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ActionsContext from '@contexts/Actions/ActionsContext';
 
-import { Container } from '@mui/material';
+import MainLayout from '@layouts/MainLayout';
 import { 
   getUserRequests, 
   deleteRequestById, 
@@ -336,7 +336,7 @@ export default function RequestsPage({ user }) {
   }, [perPage]);
 
   return (
-    <Container>
+    <MainLayout>
       <RequestsToolBar getAllRequests={() => getAllRequests(perPage)}/>
       <RequestsTable requests={requests}/>
       <IndicateBalancesModal
@@ -366,6 +366,6 @@ export default function RequestsPage({ user }) {
         perPage={perPage}
         setPerPage={setPerPage}/>
       
-    </Container>
+    </MainLayout>
   )
 }

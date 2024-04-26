@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Container } from '@mui/material';
+import MainLayout from '@layouts/MainLayout';
+
 import RequestFields from '@widgets/RequestFields/RequestFields';
 import { createRequest, addHistoryItem } from '@services/api.js';
 import { serializeFD } from '@utils/helpers/serializeFD.js';
@@ -39,7 +40,7 @@ export default function CreateRequestPage({ user }) {
   };
 
   return (
-    <Container>
+    <MainLayout>
       <form onSubmit={submitFormHandle}>
         <RequestFields
           objectName={objectName} 
@@ -51,6 +52,6 @@ export default function CreateRequestPage({ user }) {
           sendFormButTitle="Создать заявку"
         />
       </form>
-    </Container>
+    </MainLayout>
   )
 }

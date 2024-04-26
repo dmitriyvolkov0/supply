@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useLocation } from 'react-router-dom';
-import { Container } from '@mui/material';
+import MainLayout from '@layouts/MainLayout';
 import RequestsTable from '@widgets/RequestsTable/RequestsTable';
 import LazyLoadingBut from '@components/LazyLoadingBut/LazyLoadingBut';
 import FilesModal from '@widgets/FilesModal/FilesModal';
@@ -43,7 +43,7 @@ export default function SearchPage({ user }) {
 
 
   return (
-    <Container>
+    <MainLayout>
       <TitleBack title="Результаты поиска:" link={ REQUESTS_PAGE }/>
       <RequestsTable requests={requests}/>
 
@@ -59,6 +59,6 @@ export default function SearchPage({ user }) {
         isOpen={isModalFilesOpen}
         setIsOpen={setIsModaFilesOpen}
       />
-    </Container>
+    </MainLayout>
   )
 }

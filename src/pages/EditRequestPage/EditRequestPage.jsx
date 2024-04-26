@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from '@mui/material';
+import MainLayout from '@layouts/MainLayout';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
@@ -113,7 +113,7 @@ export default function EditRequestPage({ user }) {
   }, []);
 
   return (
-    <Container>
+    <MainLayout>
       {
         materials ?
           <form onSubmit={submitFormHandle}>
@@ -131,6 +131,6 @@ export default function EditRequestPage({ user }) {
           :
           <RequestSkeleton/>
       }
-    </Container>
+    </MainLayout>
   )
 }

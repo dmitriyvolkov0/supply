@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
+import MainLayout from '@layouts/MainLayout';
+
 import RequestsTable from '@widgets/RequestsTable/RequestsTable';
-import { Container } from '@mui/material';
 import LazyLoadingBut from '@components/LazyLoadingBut/LazyLoadingBut';
 import FilesModal from '@widgets/FilesModal/FilesModal';
 import { getUserRequests } from '@services/api.js';
@@ -43,7 +44,7 @@ export default function ArchivePage({user}) {
   }, []);
 
   return (
-    <Container>
+    <MainLayout>
       <RequestsTable requests={requests}/>
 
       <LazyLoadingBut
@@ -58,6 +59,6 @@ export default function ArchivePage({user}) {
         isOpen={isModalFilesOpen}
         setIsOpen={setIsModaFilesOpen}
       />
-    </Container>
+    </MainLayout>
   )
 }
