@@ -6,7 +6,7 @@ export default function LazyLoadingBut({requests, perPage, setPerPage}) {
     <>
       {
         requests && requests.length >= perPage &&
-          <Box sx={{display: 'flex', alignItems: 'center', gap: '15px'}}>
+          <Box sx={{display: 'flex', alignItems: 'center', gap: '15px', marginTop: '20px'}}>
               <Button variant="contained" onClick={() => {setPerPage(perPage + 10); }}>Вывести еще 10</Button>
               <Button variant="contained" onClick={() => {setPerPage(perPage + 100); }}>Вывести еще 100</Button>
           </Box>
