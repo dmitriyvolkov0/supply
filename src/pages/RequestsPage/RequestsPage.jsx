@@ -32,7 +32,7 @@ export default function RequestsPage({ user }) {
   const navigate = useNavigate();
 
   const [requests, setRequests] = useState(null);
-  const [perPage, setPerPage] = useState(5);
+  const [perPage, setPerPage] = useState(10);
 
   // modals
   const [isModalIndicateBalancesOpen, setIsModalIndicateBalancesOpen] = useState(false); 
