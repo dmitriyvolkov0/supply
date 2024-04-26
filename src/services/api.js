@@ -62,8 +62,8 @@ export const getAllUsers = () => {
 }
 
 // Получить все записи, к которым есть доступ у текущего пользователя
-export const getUserRequests = (userId, count, status) => {
-    return fetch(apiUrl + `requests/?status=${status}&userId=${userId}&count=${count}`)
+export const getUserRequests = (userId, count, status, searchValue, startDate, endDate, division) => {
+    return fetch(apiUrl + `requests/?status=${status}&userId=${userId}&count=${count}&searchValue=${searchValue}&startDate=${startDate}&endDate=${endDate}&division=${division}`)
         .then(res => res.json())
         .then(res => res)
         .catch(err => err);
