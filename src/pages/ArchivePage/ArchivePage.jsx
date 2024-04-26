@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import RequestsTable from '@widgets/RequestsTable/RequestsTable';
 import { Container } from '@mui/material';
+import LazyLoadingBut from '@components/LazyLoadingBut/LazyLoadingBut';
 
 import { getUserRequests } from '@services/api.js';
 
@@ -25,6 +26,10 @@ export default function ArchivePage({user}) {
   return (
     <Container>
       <RequestsTable requests={requests}/>
+      <LazyLoadingBut
+        requests={requests}
+        perPage={perPage}
+        setPerPage={setPerPage}/>
     </Container>
   )
 }
