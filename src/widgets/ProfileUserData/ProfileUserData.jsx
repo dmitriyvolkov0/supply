@@ -11,12 +11,13 @@ import Checkbox from '@mui/material/Checkbox';
 import { useNavigate } from 'react-router-dom';
 import { REQUESTS_PAGE } from '@utils/constants/routes';
 
-export default function ProfileUserData({ user }) {
+export default function ProfileUserData({ user, logout, firstLetters }) {
     const navigate = useNavigate();
+
     return (
         <div className={s.wrapper}>
             <Avatar className={s.avatar}>
-                ИС
+                {firstLetters}
             </Avatar>
             
             <div className={s.dataSection}>
@@ -49,7 +50,7 @@ export default function ProfileUserData({ user }) {
 
                 <div className={s.rightBlock}>
                     <Button onClick={() => navigate(REQUESTS_PAGE)} variant='outlined'>К заявкам</Button>
-                    <Button variant='outlined'>Выйти</Button>
+                    <Button onClick={logout} variant='outlined'>Выйти</Button>
                 </div>
             </div>
         </div>
