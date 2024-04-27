@@ -1,0 +1,77 @@
+.wrapper{
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-top: -60px;
+    padding: 0 30px 30px 70px;
+}
+
+.avatar{
+    background: var(--primary-color) !important;
+    font-size: 45px !important;
+    width: 100px !important;
+    height: 100px !important; 
+    margin-bottom: 10px !important;
+}
+
+.dataSection{
+    display: flex;
+    justify-content: space-between;
+}
+
+.title{
+    font-size: 25px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.userMainData{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.userName{
+    max-width: 390px;
+}
+
+.userEmail{
+    margin: 0;
+    color: #777;
+}
+
+.informBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.informItem{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.informItem p{
+    margin: 0;
+}
+
+.settingsBlock{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 10px;
+}
+
+.settingsForm{
+    margin-top: 20px;
+}
+
+.rightBlock{
+    display: flex;
+    gap: 10px;
+    align-items: start;
+}
