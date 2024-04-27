@@ -1,7 +1,7 @@
 import * as React from 'react';
 import s from './style.module.css';
 
-import { REQUESTS_PAGE, ARCHIVE_PAGE } from '@utils/constants/routes';
+import { PROFILE_PAGE, REQUESTS_PAGE, ARCHIVE_PAGE } from '@utils/constants/routes';
 import { useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
@@ -14,6 +14,7 @@ import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
 import { Divider } from '@mui/material';
 
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import MenuIcon from '@mui/icons-material/Menu';
 import SummarizeIcon from '@mui/icons-material/Summarize';
@@ -30,6 +31,11 @@ export default function TemporaryDrawer() {
   };
 
   const menuList = [
+    {
+      title: "Профиль",
+      icon: <AccountCircleIcon/>,
+      link: PROFILE_PAGE
+    },
     {
       title: "Заявки снабжение",
       icon: <SummarizeIcon/>,
