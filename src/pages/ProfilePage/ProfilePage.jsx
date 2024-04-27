@@ -20,6 +20,8 @@ export default function ProfilePage({ user, setUser, updateUserData }) {
     .then(res => {
         if(res.status){
           updateUserData();
+        }else{
+          alert('Произошла ошибка при смене статуса!');
         }
       })
       .catch(err => alert('Произошла ошибка при смене статуса!'));
