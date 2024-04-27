@@ -1,0 +1,20 @@
+.wrapper{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 420px;
+    max-width: 100%;
+}
+
+.fileName{
+    position: relative;
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fileSize{
+    color: var(--primary-color);
+    margin: 0 0 0 auto;
+}
