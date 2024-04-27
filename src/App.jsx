@@ -84,7 +84,7 @@ export default function App() {
 
           <Route path={PROFILE_PAGE} element={
             <PrivateRoute navTitle="Мой профиль">
-              <ProfilePage user={user}/>
+              <ProfilePage user={user} setUser={setUser}/>
             </PrivateRoute>
           }/>
 
