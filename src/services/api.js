@@ -192,3 +192,14 @@ export const addHistoryItem = (requestId, statusId, userId) =>{
     .then(res => res)
     .catch(err => err);
 }
+
+// Сменить статус параметра "Присылать уведомления на почту"
+export const changeEmailNotificationsStatus = (userId, status) =>{
+    return fetch(apiUrl + `changeEmailNotificationsStatus`, {
+        method: 'PUT',
+        body: JSON.stringify({userId: userId, status})
+    })
+    .then(res => res.json())
+    .then(res => res)
+    .catch(err => err);
+}
