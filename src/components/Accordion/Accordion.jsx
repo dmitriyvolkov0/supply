@@ -69,7 +69,7 @@ export default function MaterialsAccordion({ materials, setMaterials, disableAdd
         const newMaterials = [...materials];
         newMaterials[index] = {
             ...newMaterials[index],
-            files: files
+            files: [...newMaterials[index].files, ...files]
         };
         setMaterials(newMaterials);
     }
