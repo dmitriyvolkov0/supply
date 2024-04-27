@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './style.module.css';
 import Avatar from '@mui/material/Avatar';
 import { Button } from '@mui/material';
@@ -11,8 +11,19 @@ import Checkbox from '@mui/material/Checkbox';
 import { useNavigate } from 'react-router-dom';
 import { REQUESTS_PAGE } from '@utils/constants/routes';
 
-export default function ProfileUserData({ user, logout, firstLetters }) {
+export default function ProfileUserData({ user, logout, firstLetters, changeEmailNotificationsStatusHandle }) {
     const navigate = useNavigate();
+
+    const [emailNotificationsValue, setEmailNotificationsValue] = useState(false);
+    
+    const handleClickCheckbox = (e) =>{
+        setEmailNotificationsValue(e.target.checked);
+        changeEmailNotificationsStatusHandle(e.target.checked);
+    }
+    
+    useEffect(() => {
+        setEmailNotificationsValue(+user.email_notifications ? true : false);
+    }, [+user.email_notifications])
 
     return (
         <div className={s.wrapper}>
@@ -45,7 +56,11 @@ export default function ProfileUserData({ user, logout, firstLetters }) {
 
                 <div className={s.settingsBlock}>
                     <h2 className={s.title}>Настройки</h2>
-                    <FormControlLabel className={s.settingsForm} control={<Checkbox defaultChecked />} label="Присылать уведомления на почту" />
+                    <FormControlLabel className={s.settingsForm} control={
+                        <Checkbox 
+                            checked={emailNotificationsValue} 
+                            onClick={handleClickCheckbox}
+                    />} label="Присылать уведомления на почту" />
                 </div>
 
                 <div className={s.rightBlock}>

@@ -29,7 +29,7 @@ import { checkUserAuth } from './services/api.js';
 export default function App() {
   const { user, setUser } = useContext(UserContext);
 
-  useEffect(()=> {
+  const updateUserData = () => {
     let token = localStorage.getItem('supplyToken');
     if(token){
       checkUserAuth(token)
@@ -38,6 +38,10 @@ export default function App() {
     }else{
       setUser(false);
     }  
+  }
+
+  useEffect(()=> {
+    updateUserData();
   }, []);
   
   return (
@@ -84,7 +88,11 @@ export default function App() {
 
           <Route path={PROFILE_PAGE} element={
             <PrivateRoute navTitle="Мой профиль">
-              <ProfilePage user={user} setUser={setUser}/>
+              <ProfilePage 
+                user={user} 
+                setUser={setUser}
+                updateUserData={updateUserData}  
+              />
             </PrivateRoute>
           }/>
 
