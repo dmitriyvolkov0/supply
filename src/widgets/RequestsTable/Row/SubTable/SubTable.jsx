@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import { Tooltip } from '@mui/material';
 
 import { Link  } from 'react-router-dom';
 import LoadingData from './LoadingData/LoadingData';
@@ -17,10 +18,11 @@ import RefreshBut from '@components/RefreshBut/RefreshBut';
 import IconButton from '@mui/material/IconButton';
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
 import SummarizeIcon from '@mui/icons-material/Summarize';
-import { b64toBlob } from '@utils/helpers/base64ToBlob.js';
+
+import CircularProgress from '@mui/material/CircularProgress';
 
 import { getMaterialsByRequestId, getFilesByMaterialId } from '@services/api.js';
-import { Tooltip } from '@mui/material';
+import { b64toBlob } from '@utils/helpers/base64ToBlob.js';
 
 export default function SubTable({ requestId, isOpen }) {
     const { actions } = useContext(ActionsContext);
@@ -29,7 +31,12 @@ export default function SubTable({ requestId, isOpen }) {
     // Получить материалы
     const getMaterials = () =>
         getMaterialsByRequestId(requestId)
-            .then(res => Array.isArray(res) && setMaterialsList(res))
+            .then(res => {
+                if(Array.isArray(res)){
+                    let changedObj = res.map((item, index) => ({...item, files: null}) )
+                    setMaterialsList(changedObj);
+                }
+            })
             .then(() => getFiles());
 
     // Получить файлы для каждого материала
@@ -118,16 +125,28 @@ export default function SubTable({ requestId, isOpen }) {
                                                                 
                                                         }
 
-                                                        { data.files && data.files.length > 0 ?
-                                                                <Tooltip title="Вложения">
-                                                                    <IconButton onClick={() => actions.showFilesModal(data.files)} color="primary">
+                                                        {data.files === null ?
+                                                            <Tooltip title="Загрузка вложения...">
+                                                                    <IconButton>
+                                                                        <CircularProgress style={{ width: '20px', height: '20px'}} />
+                                                                    </IconButton>
+                                                            </Tooltip>
+
+                                                            : <>
+                                                                {data.files.length > 0 ?
+                                                                    <Tooltip title="Вложения">
+                                                                        <IconButton onClick={() => actions.showFilesModal(data.files)} color="primary">
+                                                                            <SummarizeIcon/>
+                                                                        </IconButton> 
+                                                                    </Tooltip>    
+                                                                    :
+                                                                    
+                                                                    <IconButton disabled>
                                                                         <SummarizeIcon/>
                                                                     </IconButton> 
-                                                                </Tooltip>    
-                                                            :
-                                                                <IconButton disabled>
-                                                                    <SummarizeIcon/>
-                                                                </IconButton> 
+                                                                }
+                                                            </>
+                                                      
                                                         }
                                                     </TableCell>
                                                 </TableRow>
