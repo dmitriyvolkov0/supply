@@ -7,7 +7,7 @@ import Select from '@components/Select/Select';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import AboutSupplyText from '@components/AboutSupplyText/AboutSupplyText';
 
-export default function SignInForm({ users, setActiveForm, onSignIn }) {
+export default function SignInForm({ users, onSignIn }) {
   const [fields, setFields] = useState({
     userId: '',
     password: ''
@@ -40,7 +40,6 @@ export default function SignInForm({ users, setActiveForm, onSignIn }) {
             />
             
             <Button type="submit" variant="contained">Войти</Button>
-            <Button onClick={() => setActiveForm(1)}>Зарегистрироваться</Button>
             <AboutSupplyText/>
         </form>
     </div>
