@@ -5,6 +5,7 @@ import { Button } from '@mui/material';
 
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import SensorOccupiedIcon from '@mui/icons-material/SensorOccupied';
+import NumbersIcon from '@mui/icons-material/Numbers';
 
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
@@ -44,6 +45,10 @@ export default function ProfileUserData({ user, logout, firstLetters, changeEmai
                     </div>
                     
                     <div className={s.informBlock}>
+                        <div className={s.informItem}>
+                            <NumbersIcon/>
+                            <p>Уникальный идентификатор: <span>{user.id}</span></p>
+                        </div>
                         <div className={s.informItem}>
                             <PeopleAltIcon/>
                             <p>Отдел: <span>{user.division_name}</span></p>
