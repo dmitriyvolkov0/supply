@@ -1,23 +1,18 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import MainLayout from '@layouts/MainLayout';
+import Actions from '@layouts/Actions';
 import RequestsTable from '@widgets/RequestsTable/RequestsTable';
 import LazyLoadingBut from '@components/LazyLoadingBut/LazyLoadingBut';
-import FilesModal from '@widgets/FilesModal/FilesModal';
 import TitleBack from '@components/TitleBack/TitleBack';
 
-import ActionsContext from '@contexts/Actions/ActionsContext';
 
 import { REQUESTS_PAGE } from '@utils/constants/routes.js';
 import { getUserRequests } from '@services/api.js';
 
 export default function SearchPage({ user }) {
-  const { setActions } = useContext(ActionsContext);
-
   const [requests, setRequests] = useState(null);
   const [perPage, setPerPage] = useState(10);
-  const [files, setFiles] = useState(null); //Вложения
-  const [isModalFilesOpen, setIsModaFilesOpen] = useState(false);
   
   const location = useLocation();
     const [searchValue, setSearchValue] = useState('');
@@ -28,23 +23,10 @@ export default function SearchPage({ user }) {
     const getFilteredRequests = () => {
       getUserRequests(user.id, perPage, 'all', searchValue, startDate, endDate, division)
         .then(res => {
-          setRequests(res)
+          setRequests(res);
         })
         .catch(err => alert('Возникла ошибка при получении заявок!'));
     }
-
-    // Открыть модальное окно просмотра вложений
-    const showFilesModal = (files) => {
-      setIsModaFilesOpen(true);
-      setFiles(files);
-    }
-
-    useEffect(() => {
-      let actions = {
-        showFilesModal: showFilesModal
-      };
-      setActions(actions);
-    }, []);
 
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
@@ -56,26 +38,20 @@ export default function SearchPage({ user }) {
 
     useEffect(() => {
         getFilteredRequests();
-    }, [requests, perPage, searchValue, startDate, endDate, division])
-
+    }, [perPage, searchValue, startDate, endDate, division])
 
   return (
     <MainLayout>
-      <TitleBack title="Результаты поиска:" link={ REQUESTS_PAGE }/>
-      <RequestsTable requests={requests}/>
+      <Actions user={user}>
+        <TitleBack title="Результаты поиска:" link={ REQUESTS_PAGE }/>
+        <RequestsTable requests={requests}/>
 
-      <LazyLoadingBut
-        requests={requests}
-        perPage={perPage}
-        setPerPage={setPerPage}
-      />
-        
-      <FilesModal
-        title="Вложения"
-        files={files}
-        isOpen={isModalFilesOpen}
-        setIsOpen={setIsModaFilesOpen}
-      />
+        <LazyLoadingBut
+          requests={requests}
+          perPage={perPage}
+          setPerPage={setPerPage}
+        />
+      </Actions>
     </MainLayout>
   )
 }
