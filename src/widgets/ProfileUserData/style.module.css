@@ -54,6 +54,11 @@
     gap: 10px;
 }
 
+.informItem span{
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
 .informItem p{
     margin: 0;
 }
