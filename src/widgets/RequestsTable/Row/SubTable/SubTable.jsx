@@ -35,13 +35,14 @@ export default function SubTable({ requestId, isOpen }) {
                 if(Array.isArray(res)){
                     let changedObj = res.map((item, index) => ({...item, files: null}) )
                     setMaterialsList(changedObj);
+                    return changedObj;
                 }
             })
-            .then(() => getFiles());
+            .then((res) => getFiles(res));
 
     // Получить файлы для каждого материала
-    const getFiles = () =>{
-        materialsList && materialsList.map((item, index) => {
+    const getFiles = (materialsListObj) =>{
+        materialsListObj && materialsListObj.map((item, index) => {
             let filesArr = [];
             getFilesByMaterialId(item.id)
                 .then(files => {
@@ -52,8 +53,8 @@ export default function SubTable({ requestId, isOpen }) {
                     });
                 })
                 .then(() => {
-                    materialsList[index].files = filesArr;
-                    setMaterialsList([...materialsList]);
+                    materialsListObj[index].files = filesArr;
+                    setMaterialsList([...materialsListObj]);
                 })
                 .catch(err => console.log('Ошибка получения вложений!'));
         });
