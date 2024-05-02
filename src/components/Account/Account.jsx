@@ -6,7 +6,7 @@ import AccountWindow from './AccountWindow/AccountWindow';
 
 export default function Account() {
     const {user, setUser} = useContext(UserContext);
-    const firstLetters = user.name.split(' ')[0][0] + user.name.split(' ')[1][0];
+    const firstLetters = user.name && (user.name.split(' ')[0][0] + user.name.split(' ')[1][0]);
     const [isOpen, setIsOpen] = useState(false);
 
     const accountWindowWrapperRef = useRef(null);
