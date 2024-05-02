@@ -18,15 +18,21 @@ export default function AccountWindow({user, setUser, accountWindowWrapperRef, f
     return (
         <div ref={accountWindowWrapperRef} className={s.accountDataWrapper}>
             <div className={s.accountData}>
-                <p className={s.userDivision}>
-                    {user.division_name}
-                </p>
+                <Tooltip title="Ваш отдел">
+                    <p className={s.userDivision}>
+                        {user.division_name}
+                    </p>
+                </Tooltip>
+
                 <Avatar sx={{ bgcolor: blue[400], fontSize: 24, width: 55, height: 55 }}>
                     {firstLetters}
                 </Avatar>
+                
                 <Typography className={s.userName} variant="p" component="p">{user.name}</Typography>
+                
                 <p className={s.userEmail}>{user.email}</p>
-                <Tooltip title="Ваша роль">
+                
+                <Tooltip title="Ваша роль" placement="right">
                     <p className={s.userRole}>{user.role_name}</p>
                 </Tooltip>
 
