@@ -10,6 +10,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { useNavigate } from 'react-router-dom';
 import { REQUESTS_PAGE } from '@utils/constants/routes';
+import { Tooltip } from '@mui/material';
 
 export default function ProfileUserData({ user, logout, firstLetters, changeEmailNotificationsStatusHandle }) {
     const navigate = useNavigate();
@@ -56,11 +57,14 @@ export default function ProfileUserData({ user, logout, firstLetters, changeEmai
 
                 <div className={s.settingsBlock}>
                     <h2 className={s.title}>Настройки</h2>
-                    <FormControlLabel className={s.settingsForm} control={
-                        <Checkbox 
-                            checked={emailNotificationsValue} 
-                            onClick={handleClickCheckbox}
-                    />} label="Присылать уведомления на почту" />
+                    <Tooltip title="Уведомления по почте временно не работают">
+                        <FormControlLabel className={s.settingsForm} control={
+                            <Checkbox 
+                                disabled
+                                checked={emailNotificationsValue} 
+                                onClick={handleClickCheckbox}
+                        />} label="Присылать уведомления на почту" />
+                    </Tooltip>
                 </div>
 
                 <div className={s.rightBlock}>
