@@ -18,6 +18,7 @@ import DoneAllIcon from '@mui/icons-material/DoneAll';
 import WarehouseIcon from '@mui/icons-material/Warehouse';
 import FactoryIcon from '@mui/icons-material/Factory';
 import HistoryIcon from '@mui/icons-material/History';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const ButtonSkeleton = ({title, icon, onClick}) => {
     return <Tooltip title={title}>
@@ -58,7 +59,6 @@ const ArrivedInWarehouseBut = ({onClick }) => {
 const MaterialTransferredBut  = ({ onClick }) => {
     return <ButtonSkeleton onClick={onClick} title="Материал выдан/получен" icon={<DoneAllIcon />}/>
 } 
-// ================
 
 // Принять в обработку (снабжение)
 const HandleRequestSnabBut = ({ onClick }) => {
@@ -85,6 +85,10 @@ const MaterialsEditControlBut = ({ onClick }) => {
     return <ButtonSkeleton onClick={onClick} title="Подтвердить и отправить снабжению" icon={<DoneAllIcon />}/>
 }
 
+// Вернуться к предыдущему статусу заявки
+const BackStatusBut  = ({ onClick }) => {
+    return <ButtonSkeleton onClick={onClick} title="Вернуться к предыдущему статусу" icon={<ArrowBackIcon />}/>
+} 
 
 // Кнопки заказчика
 const UserButtons = ({requestId, statusId}) => {
@@ -148,12 +152,18 @@ const SnabButtons = ({ userId, creatorUserId, requestId, statusId }) => {
         case 6:
             return <>
                 <EditBut onClick={() => actions.editRequest(requestId)}/> 
+                <BackStatusBut onClick={() => actions.backStatusHandle(requestId, 5)}/>
                 <MaterialsArrivedWarehouseBut onClick={() => actions.materialsArrivedWarehouse(requestId)}/>
                 <MaterialsArrivedObjectBut onClick={() => actions.materialsArrivedObject(requestId)}/>
             </>
+        case 7: 
+            return <BackStatusBut onClick={() => actions.backStatusHandle(requestId, 6)}/>
+        case 8: 
+            return <BackStatusBut onClick={() => actions.backStatusHandle(requestId, 6)}/>
+        case 9: 
+            return <BackStatusBut onClick={() => actions.backStatusHandle(requestId, 6)}/>
         case 10:
             return userId === creatorUserId && <InArchiveBut onClick={() => actions.inArchive(requestId)}/>
-    
         default:
             break;
     }
@@ -179,7 +189,6 @@ const ControlButtons = ({ userId, creatorUserId, requestId, statusId }) => {
             </>
         case 10:
             return userId === creatorUserId && <InArchiveBut onClick={() => actions.inArchive(requestId)}/>
-    
         default:
             break;
     }
