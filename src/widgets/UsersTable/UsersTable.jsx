@@ -9,16 +9,15 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Preloader from '@components/Preloader/Preloader';
 import EmptyTable from '@components/EmptyTable/EmptyTable';
-import EditIcon from '@mui/icons-material/Edit';
-import { IconButton } from '@mui/material';
+
 import { useNavigate } from 'react-router-dom';
 import { USERS_PAGE } from '@utils/constants/routes.js';
 import PasswordShowHide from '@components/PasswordShowHide/PasswordShowHide';
-
+import Tools from './Tools/Tools';
 
 import { getFullDateByStrFromDb } from '@utils/helpers/timeFunctions.js';
 
-export default function HistoryTable({ data }) {
+export default function HistoryTable({ data, blockProfileHandle }) {
     const navigate = useNavigate();
     const editClickHandle = (id) => navigate(USERS_PAGE + "/" + id);
     
@@ -47,9 +46,13 @@ export default function HistoryTable({ data }) {
                                 data.map((item, index) => 
                                     <TableRow key={'users-'+index} className={s.itemRow}>
                                         <TableCell>
-                                            <IconButton onClick={() => editClickHandle(item.id)} className={s.itemButton}>
-                                                <EditIcon/>
-                                            </IconButton>
+                                            <div className={s.itemTools}>
+                                                <Tools 
+                                                    item={item} 
+                                                    editClickHandle={editClickHandle}
+                                                    blockProfileHandle={blockProfileHandle}
+                                                />
+                                            </div>
                                         </TableCell>
                                         <TableCell>{item.id}</TableCell>
                                         <TableCell>{item.name}</TableCell>
