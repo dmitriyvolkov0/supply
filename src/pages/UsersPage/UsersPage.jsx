@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import UsersTable from '@widgets/UsersTable/UsersTable';
 import MainLayout from '@layouts/MainLayout';
 import { getAllUsers } from '@services/api.js'; 
-import MainToolbar from '@components/MainToolbar/MainToolbar';
-import { Button } from '@mui/material';
+import UsersToolBar from '@widgets/UsersToolBar/UsersToolBar';
 
 export default function UsersPage() {
     const [users, setUsers] = useState(null);
@@ -23,9 +22,7 @@ export default function UsersPage() {
     
     return (
         <MainLayout>
-            <MainToolbar>
-                <Button variant='outlined'>Создать пользователя</Button>
-            </MainToolbar>
+            <UsersToolBar/>
             <UsersTable data={users}/>
         </MainLayout>
     )
