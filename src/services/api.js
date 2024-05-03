@@ -11,17 +11,6 @@ export const signIn = (data) => {
     .catch(err => err);
 }
 
-// Зарегистрироваться
-export const signUp = (name, email, password, role, division) => {
-    return fetch(apiUrl + 'signup/', {
-        method: 'POST',
-        body: JSON.stringify({name: name, email: email, password: password, role: role, division: division})
-    })
-    .then(res => res.json())
-    .then(res => res)
-    .catch(err => err);
-}
-
 // Проверка авторизации
 export const checkUserAuth = (token) => {
     return fetch(apiUrl + 'checkUserAuth/', {
@@ -198,6 +187,17 @@ export const changeEmailNotificationsStatus = (userId, status) =>{
     return fetch(apiUrl + `changeEmailNotificationsStatus`, {
         method: 'PUT',
         body: JSON.stringify({userId: userId, status})
+    })
+    .then(res => res.json())
+    .then(res => res)
+    .catch(err => err);
+}
+
+// Создать пользователя
+export const createUser = (name, email, password, division, role) => {
+    return fetch(apiUrl + 'createUser/', {
+        method: 'POST',
+        body: JSON.stringify({name: name, email: email, password: password, role: role, division: division})
     })
     .then(res => res.json())
     .then(res => res)
