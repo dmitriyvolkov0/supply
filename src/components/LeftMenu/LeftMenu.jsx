@@ -1,7 +1,8 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import s from './style.module.css';
+import UserContext from '@contexts/User/UserContext';
 
-import { PROFILE_PAGE, REQUESTS_PAGE, ARCHIVE_PAGE } from '@utils/constants/routes';
+import { PROFILE_PAGE, REQUESTS_PAGE, ARCHIVE_PAGE, USERS_PAGE } from '@utils/constants/routes';
 import { useNavigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
@@ -18,11 +19,12 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import MenuIcon from '@mui/icons-material/Menu';
 import SummarizeIcon from '@mui/icons-material/Summarize';
+import GroupIcon from '@mui/icons-material/Group';
 
 import LogoImg from '@assets/logo.webp';
 
-
 export default function TemporaryDrawer() {
+  const { user } = useContext(UserContext);
   const [open, setOpen] = React.useState(false);
   const navigate = useNavigate();
 
@@ -30,7 +32,7 @@ export default function TemporaryDrawer() {
     setOpen(newOpen);
   };
 
-  const menuList = [
+  let menuList = [
     {
       title: "Профиль",
       icon: <AccountCircleIcon/>,
@@ -48,6 +50,17 @@ export default function TemporaryDrawer() {
     }
   ];
 
+  if(+user.role_id === 1) {
+    menuList = [
+      ...menuList,
+      {
+        title: "Пользователи",
+        icon: <GroupIcon/>,
+        link: USERS_PAGE
+      }
+    ];
+  }
+
   const DrawerList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
         <div className={s.logoWrapper}>
@@ -58,14 +71,14 @@ export default function TemporaryDrawer() {
         
         <List>
             {
-                menuList.map((item, index) => 
-                    <ListItem disablePadding key={index}>
-                        <ListItemButton onClick={()=> navigate(item.link)}>
-                            <ListItemIcon> {item.icon} </ListItemIcon>
-                            <ListItemText primary={item.title}/>
-                        </ListItemButton>
-                    </ListItem>
-                )
+              menuList && menuList.map((item, index) => 
+                  <ListItem disablePadding key={index}>
+                      <ListItemButton onClick={()=> navigate(item.link)}>
+                          <ListItemIcon> {item.icon} </ListItemIcon>
+                          <ListItemText primary={item.title}/>
+                      </ListItemButton>
+                  </ListItem>
+              )
             }
         </List>
     </Box>
