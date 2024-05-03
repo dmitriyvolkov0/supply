@@ -1,9 +1,9 @@
-.itemRow:hover .itemButton{
+.itemRow:hover .itemTools{
     opacity: 1;
     transition: .5s;
 }
 
-.itemRow .itemButton{
+.itemRow .itemTools{
     opacity: 0;
     transition: .5s;
 }
