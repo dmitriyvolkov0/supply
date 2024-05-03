@@ -194,6 +194,17 @@ const ControlButtons = ({ userId, creatorUserId, requestId, statusId }) => {
     }
 }
 
+// Кнопки администратора
+const AdminButtons = ({ requestId, statusId }) => {
+    const { actions } = useContext(ActionsContext);
+    return <>
+        <DeleteBut onClick={() => actions.deleteRequest(requestId)}/>
+        <EditBut onClick={() => actions.editRequest(requestId)}/>
+        {
+            statusId > 1 && <BackStatusBut onClick={() => actions.backStatusHandle(requestId, statusId-1)}/>
+        }
+    </>
+}
 
 export default function Tools({ data, isOpen, setOpen, hideButtons }) {
     const { user } = useContext(UserContext);
@@ -221,6 +232,10 @@ export default function Tools({ data, isOpen, setOpen, hideButtons }) {
 
             {!hideButtons && 
                 <>
+                    {+user.role_id === 1 &&
+                        <AdminButtons requestId={+data.id} statusId={+data.status_id}/>
+                    }
+
                     {+user.role_id === 2 &&
                         <UserButtons requestId={+data.id} statusId={+data.status_id}/>
                     }
