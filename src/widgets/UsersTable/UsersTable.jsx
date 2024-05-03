@@ -1,4 +1,5 @@
 import * as React from 'react';
+import s from './style.module.css';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,11 +11,16 @@ import Preloader from '@components/Preloader/Preloader';
 import EmptyTable from '@components/EmptyTable/EmptyTable';
 import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
-import s from './style.module.css';
+import { useNavigate } from 'react-router-dom';
+import { USERS_PAGE } from '@utils/constants/routes.js';
 
 import { getFullDateByStrFromDb } from '@utils/helpers/timeFunctions.js';
 
 export default function HistoryTable({ data }) {
+    const navigate = useNavigate();
+
+    const editClickHandle = (id) => navigate(USERS_PAGE + "/" + id);
+    
     return (
         <>
             { data === null && <Preloader/> }
@@ -40,7 +46,7 @@ export default function HistoryTable({ data }) {
                                 data.map((item, index) => 
                                     <TableRow key={'users-'+index} className={s.itemRow}>
                                         <TableCell>
-                                            <IconButton className={s.itemButton}>
+                                            <IconButton onClick={() => editClickHandle(item.id)} className={s.itemButton}>
                                                 <EditIcon/>
                                             </IconButton>
                                         </TableCell>
