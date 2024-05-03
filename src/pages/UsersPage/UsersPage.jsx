@@ -5,7 +5,8 @@ import {
     getAllUsers, 
     getUserDivisions, 
     getUserRoles,
-    createUser
+    createUser,
+    blockUser
 } from '@services/api.js'; 
 import UsersToolBar from '@widgets/UsersToolBar/UsersToolBar';
 import CreateUserModal from '@widgets/CreateUserModal/CreateUserModal';
@@ -65,6 +66,30 @@ export default function UsersPage() {
             });
     }
 
+    // Заблокировать пользователя
+    const blockUnblockProfileHandle = (userId, isBlock) => {
+        console.log(isBlock);
+        // if(isBlock){
+        //     blockUser(userId, true)
+        //         .then(res => {
+        //             console.log(res);
+        //         })
+        //         .catch(err => {
+        //             alert('Возникла ошибка при блокеровке пользователя!');
+        //             console.log(err);  
+        //         });
+        // }else{
+        //     blockUser(userId, false)
+        //         .then(res => {
+        //             console.log(res);
+        //         })
+        //         .catch(err => {
+        //             alert('Возникла ошибка при блокеровке пользователя!');
+        //             console.log(err);  
+        //         });
+        // }
+    }
+
     useEffect(() => {
         getAllUsersHandle();
         getUserDivisionsHandle();
@@ -74,7 +99,10 @@ export default function UsersPage() {
     return (
         <MainLayout>
             <UsersToolBar setIsOpenCreateUserModal={setIsOpenCreateUserModal}/>
-            <UsersTable data={users}/>
+            <UsersTable 
+                data={users}
+                blockUnblockProfileHandle={blockUnblockProfileHandle}
+            />
             <CreateUserModal
                 createUserHandle={createUserHandle}
                 divisions={divisions}

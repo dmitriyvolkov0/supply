@@ -4,7 +4,7 @@ import { Box, IconButton, Tooltip } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import LockIcon from '@mui/icons-material/Lock';
 
-export default function Tools({ item, editClickHandle, blockProfileHandle }) {
+export default function Tools({ item, editClickHandle, blockUnblockProfileHandle }) {
   return (
     <Box sx={{display: 'flex'}}>
         <Tooltip title="Редактировать профиль">
@@ -14,7 +14,7 @@ export default function Tools({ item, editClickHandle, blockProfileHandle }) {
         </Tooltip>
 
         <Tooltip title="Заблокировать профиль">
-            <IconButton onClick={() => blockProfileHandle(item.id)}>
+            <IconButton onClick={() => blockUnblockProfileHandle(item.id, item.isBlocked)}>
                 <LockIcon/>
             </IconButton>
         </Tooltip>

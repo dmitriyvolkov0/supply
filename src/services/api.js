@@ -222,3 +222,14 @@ export const saveUser = (userId, name, email, password, division, role) => {
         .then(res => res)
         .catch(err => err);
 }
+
+// Заблокировать пользователя
+export const blockUser = (userId, isBlock) => {
+    return fetch(apiUrl + 'blockUser', {
+        method: 'PUT',
+        body: JSON.stringify({userId: userId, isBlock: isBlock})
+    })
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err);
+}

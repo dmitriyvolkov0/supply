@@ -17,10 +17,10 @@ import Tools from './Tools/Tools';
 
 import { getFullDateByStrFromDb } from '@utils/helpers/timeFunctions.js';
 
-export default function HistoryTable({ data, blockProfileHandle }) {
+export default function HistoryTable({ data, blockUnblockProfileHandle }) {
     const navigate = useNavigate();
     const editClickHandle = (id) => navigate(USERS_PAGE + "/" + id);
-    
+
     return (
         <>
             { data === null && <Preloader/> }
@@ -50,7 +50,7 @@ export default function HistoryTable({ data, blockProfileHandle }) {
                                                 <Tools 
                                                     item={item} 
                                                     editClickHandle={editClickHandle}
-                                                    blockProfileHandle={blockProfileHandle}
+                                                    blockUnblockProfileHandle={blockUnblockProfileHandle}
                                                 />
                                             </div>
                                         </TableCell>
