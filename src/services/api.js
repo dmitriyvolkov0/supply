@@ -203,3 +203,11 @@ export const createUser = (name, email, password, division, role) => {
     .then(res => res)
     .catch(err => err);
 }
+
+// Получить пользователя по id
+export const getUserById = (id) => {
+    return fetch(apiUrl + 'users/' + id)
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err);
+}
