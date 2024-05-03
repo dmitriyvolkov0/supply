@@ -292,6 +292,23 @@ export default function Actions({ children, user }) {
     setFiles(files);
   }
 
+  // Вернуться к предыдущему статусу заявки
+  const backStatusHandle = (requestId, statusId) => {
+    let isHandle = window.confirm("Вы действительно хотите вернуть предыдущий статус заявки?");
+    if(isHandle){
+      setStatus(requestId, statusId)
+        .then(res => {
+          if(res.status){
+            alert('Заявка успешно перемещена в архив!');
+            addHistoryItem(requestId, 14, user.id);
+          }else{
+            alert('Во время перемещение заявки в архив произошла ошибка!')
+          }
+        })
+        .catch(err => alert('Возникла внутренняя ошибка!'));
+    }
+  }
+
   useEffect(() => {
     let actions = {
       deleteRequest: deleteRequest,
@@ -306,7 +323,8 @@ export default function Actions({ children, user }) {
       arrivedInWarehouse: arrivedInWarehouse,
       materialTransferred: materialTransferred,
       inArchive: inArchive,
-      showFilesModal: showFilesModal
+      showFilesModal: showFilesModal,
+      backStatusHandle: backStatusHandle
     };
     setActions(actions);
   }, []);
