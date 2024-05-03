@@ -211,3 +211,14 @@ export const getUserById = (id) => {
         .then(res => res)
         .catch(err => err);
 }
+
+// Сохранить изменения при редактировании пользователя
+export const saveUser = (userId, name, email, password, division, role) => {
+    return fetch(apiUrl + 'saveUser', {
+        method: 'POST',
+        body: JSON.stringify({userId: userId, name: name, email: email, password: password, division: division, role: role})
+    })
+        .then(res => res.json())
+        .then(res => res)
+        .catch(err => err);
+}
