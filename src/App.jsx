@@ -10,7 +10,8 @@ import {
   ARCHIVE_PAGE,
   SEARCH_PAGE,
   HISTORY_SINGLE_PAGE,
-  PROFILE_PAGE
+  PROFILE_PAGE,
+  USERS_PAGE
 } from './utils/constants/routes.js';
 
 import AuthPage from './pages/AuthPage/AuthPage.jsx';
@@ -21,6 +22,7 @@ import ArchivePage from './pages/ArchivePage/ArchivePage.jsx';
 import SearchPage from './pages/SearchPage/SearchPage.jsx';
 import HistoryPage from './pages/HistoryPage/HistoryPage.jsx';
 import ProfilePage from './pages/ProfilePage/ProfilePage.jsx';
+import UsersPage from './pages/UsersPage/UsersPage.jsx';
 import NotFound from './pages/NotFound/NotFound.jsx';
 
 import PrivateRoute from './components/PrivateRoute/PrivateRoute.jsx';
@@ -93,6 +95,12 @@ export default function App() {
                 setUser={setUser}
                 updateUserData={updateUserData}  
               />
+            </PrivateRoute>
+          }/>
+
+          <Route path={USERS_PAGE} element={
+            <PrivateRoute navTitle="Управление пользователями">
+              <UsersPage/>
             </PrivateRoute>
           }/>
 
