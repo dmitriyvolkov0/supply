@@ -13,12 +13,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { USERS_PAGE } from '@utils/constants/routes.js';
+import PasswordShowHide from '@components/PasswordShowHide/PasswordShowHide';
+
 
 import { getFullDateByStrFromDb } from '@utils/helpers/timeFunctions.js';
 
 export default function HistoryTable({ data }) {
     const navigate = useNavigate();
-
     const editClickHandle = (id) => navigate(USERS_PAGE + "/" + id);
     
     return (
@@ -53,7 +54,9 @@ export default function HistoryTable({ data }) {
                                         <TableCell>{item.id}</TableCell>
                                         <TableCell>{item.name}</TableCell>
                                         <TableCell>{item.email}</TableCell>
-                                        <TableCell>{item.password}</TableCell>
+                                        <TableCell>
+                                            <PasswordShowHide value={item.password}/>
+                                        </TableCell>
                                         <TableCell>{item.role_name}</TableCell>
                                         <TableCell>{item.division_name}</TableCell>
                                         <TableCell>{getFullDateByStrFromDb(item.created_at)}</TableCell>
