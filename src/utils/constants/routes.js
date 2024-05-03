@@ -9,3 +9,4 @@ export const HISTORY_PAGE = '/history/';
 export const HISTORY_SINGLE_PAGE = '/history/:requestId';
 export const PROFILE_PAGE = '/profile';
 export const USERS_PAGE = '/users';
+export const USERS_SINGLE_PAGE = '/users/:userId';
