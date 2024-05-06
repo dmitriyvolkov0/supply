@@ -5,8 +5,7 @@ import {
     getAllUsers, 
     getUserDivisions, 
     getUserRoles,
-    createUser,
-    blockUser
+    createUser
 } from '@services/api.js'; 
 import UsersToolBar from '@widgets/UsersToolBar/UsersToolBar';
 import CreateUserModal from '@widgets/CreateUserModal/CreateUserModal';
