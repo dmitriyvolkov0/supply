@@ -224,10 +224,10 @@ export const saveUser = (userId, name, email, password, division, role) => {
 }
 
 // Заблокировать пользователя
-export const blockUser = (userId, isBlock) => {
+export const blockUser = (userId, isBlocked) => {
     return fetch(apiUrl + 'blockUser', {
         method: 'PUT',
-        body: JSON.stringify({userId: userId, isBlock: isBlock})
+        body: JSON.stringify({userId: userId, isBlocked: isBlocked})
     })
         .then(res => res.json())
         .then(res => res)

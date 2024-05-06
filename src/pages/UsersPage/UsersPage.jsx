@@ -20,8 +20,11 @@ export default function UsersPage() {
 
     // Получить всех пользователей
     const getAllUsersHandle = () => {
-        getAllUsers()
-            .then(res => setUsers(res.sort((a, b) => a.id - b.id)))
+        return getAllUsers()
+            .then(res => {
+                setUsers(res.sort((a, b) => a.id - b.id));
+                return res;
+            })
             .catch(err => {
                 alert('Ошибка получения пользователей!');
                 console.log(err);
@@ -66,30 +69,6 @@ export default function UsersPage() {
             });
     }
 
-    // Заблокировать пользователя
-    const blockUnblockProfileHandle = (userId, isBlock) => {
-        console.log(isBlock);
-        // if(isBlock){
-        //     blockUser(userId, true)
-        //         .then(res => {
-        //             console.log(res);
-        //         })
-        //         .catch(err => {
-        //             alert('Возникла ошибка при блокеровке пользователя!');
-        //             console.log(err);  
-        //         });
-        // }else{
-        //     blockUser(userId, false)
-        //         .then(res => {
-        //             console.log(res);
-        //         })
-        //         .catch(err => {
-        //             alert('Возникла ошибка при блокеровке пользователя!');
-        //             console.log(err);  
-        //         });
-        // }
-    }
-
     useEffect(() => {
         getAllUsersHandle();
         getUserDivisionsHandle();
@@ -101,7 +80,6 @@ export default function UsersPage() {
             <UsersToolBar setIsOpenCreateUserModal={setIsOpenCreateUserModal}/>
             <UsersTable 
                 data={users}
-                blockUnblockProfileHandle={blockUnblockProfileHandle}
             />
             <CreateUserModal
                 createUserHandle={createUserHandle}
