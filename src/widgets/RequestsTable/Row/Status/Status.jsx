@@ -39,14 +39,17 @@ export default function Status({statusId, statusName, warehouseName}) {
     }
     
     return (
-        <div className={`${colorClass} ${s.status}`}>
-            {statusName}
-            
-            {+statusId === 8 && warehouseName && 
-                <p className={s.warehouseText}>
-                    {warehouseName}
-                </p>
-            }
+        <div>
+            <div className={`${colorClass} ${s.status}`}>
+                {statusName}
+                
+                {/* {+statusId === 8 && warehouseName &&  */}
+                {(+statusId === 8 || +statusId === 10 || +statusId === 11) && warehouseName && 
+                    <p className={s.warehouseText}>
+                        {warehouseName}
+                    </p>
+                }
+            </div>
         </div>
     )
 }
