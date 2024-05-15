@@ -10,7 +10,8 @@ import {
   getUserByRequestId,
   getWarehouses,
   setWarehouse,
-  addHistoryItem
+  addHistoryItem,
+  sendMailToUser
 } from '@services/api.js';
 
 // modals
@@ -89,7 +90,6 @@ export default function Actions({ children, user }) {
 
   // Установить указанные остатки материалов в бд
   const setBalancesHandle = (materials) => {
-    console.log(materials);
     if(materials.length !== 0) {
       let requestId = materials[0].request_id;
 
@@ -103,6 +103,7 @@ export default function Actions({ children, user }) {
                 if(res.status){
                   alert('Остатки успешно указаны!');
                   addHistoryItem(requestId, 3, user.id);
+                  sendMailToUser(null, 2, `Вам поступила заявка №${requestId}. Обаботайте её.`);
                   setIsModalIndicateBalancesOpen(false);
                 }else{
                   alert('Возникла ошибка при указании остатков!');
