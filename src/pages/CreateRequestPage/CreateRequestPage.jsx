@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import MainLayout from '@layouts/MainLayout';
 
 import RequestFields from '@widgets/RequestFields/RequestFields';
-import { createRequest, addHistoryItem } from '@services/api.js';
+import { createRequest, addHistoryItem, sendMailToUser } from '@services/api.js';
 import { serializeFD } from '@utils/helpers/serializeFD.js';
 import { useNavigate } from 'react-router-dom';
 import { REQUESTS_PAGE } from '@utils/constants/routes.js';
@@ -33,6 +33,10 @@ export default function CreateRequestPage({ user }) {
         if(res.createRequest.status){
           alert('Заявка успешно создана!');
           addHistoryItem(res.createRequest.requestId, 1, user.id); //Добавляем историю в бд
+
+          //Отправляем сообщение на почту кладовщикам (divisionId 5 - кладовщики)
+          sendMailToUser(null, 5, 'Создана новая заявка! Обработайте её.');
+            
           navigate(REQUESTS_PAGE);
         }else{ alert('Возникла ошибка при создании заявки!'); }
       })
