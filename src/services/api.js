@@ -232,4 +232,15 @@ export const blockUser = (userId, isBlocked) => {
         .then(res => res.json())
         .then(res => res)
         .catch(err => err);
+    }
+    
+// Отправка информации о статусе заявки по почте (в функцию передавать либо email либо divisionId)
+export const sendMailToUser = (email, divisionId, message) => {
+    return fetch(apiUrl + 'sendMailToUser', {
+        method: 'POST',
+        body: JSON.stringify({ email: email, divisionId: divisionId, message: message  })
+    })
+    .then(res => res.json())
+    .then(res => res)
+    .catch(err => err);
 }
