@@ -1,6 +1,5 @@
 import React from 'react';
 import Avatar from '@mui/material/Avatar';
-import { primary } from '@mui/material/colors';
 import { Box, Tooltip } from '@mui/material';
 
 export default function AvatarBlock({ isOpen, setIsOpen, firstLetters }) {
