@@ -71,7 +71,7 @@ export default function SubTable({ requestId, isOpen }) {
     const refreshClickHandle = () => getMaterials();
 
     return (
-        <TableRow sx={{background: '#ddd'}}>
+        <TableRow>
             <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
                 <Collapse in={isOpen} timeout="auto" unmountOnExit>
                     {!materialsList || materialsList.length === 0 ? 

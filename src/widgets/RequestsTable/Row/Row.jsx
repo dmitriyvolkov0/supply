@@ -14,7 +14,7 @@ export default function Row({ data, hideButtons }) {
     const [isOpen, setOpen] = React.useState(false);
     return (
         <>
-            <TableRow>
+            <TableRow sx={{background: '#ededed'}}>
                 <TableCell>
                     <div className={s.tools}>
                         <Tools 
