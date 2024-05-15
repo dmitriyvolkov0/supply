@@ -48,7 +48,7 @@
 .userRole{
     margin: 5px 0 15px 0;
     padding: 5px 10px;
-    color: var(--primary-color);
+    color: #fff;
     background: var(--primary-color-lighten);
     border-radius: 5px;
     font-size: 13px;
