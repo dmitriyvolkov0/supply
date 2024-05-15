@@ -24,7 +24,7 @@ export default function AccountWindow({user, setUser, accountWindowWrapperRef, f
                     </p>
                 </Tooltip>
 
-                <Avatar sx={{ bgcolor: blue[400], fontSize: 24, width: 55, height: 55 }}>
+                <Avatar sx={{ background: '#ff6600', fontSize: 24, width: 55, height: 55 }}>
                     {firstLetters}
                 </Avatar>
                 
