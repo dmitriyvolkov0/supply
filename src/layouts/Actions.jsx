@@ -103,7 +103,6 @@ export default function Actions({ children, user }) {
                 if(res.status){
                   alert('Остатки успешно указаны!');
                   addHistoryItem(requestId, 3, user.id);
-                  sendMailToUser(null, 2, `Вам поступила заявка №${requestId}. Обаботайте её.`);
                   setIsModalIndicateBalancesOpen(false);
                 }else{
                   alert('Возникла ошибка при указании остатков!');
