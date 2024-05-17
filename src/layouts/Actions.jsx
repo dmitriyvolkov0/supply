@@ -158,6 +158,7 @@ export default function Actions({ children, user }) {
           if(res.status){
             alert('Вы успешно подтвердили информацию! Заявка отправлена на обработку снабжению.');
             addHistoryItem(requestId, 5, user.id);
+            sendMailToUser(null, 2, null, `Вам поступила заявка №${requestId}. Обаботайте её.`);  //Отправляем сообщение снабжению
           }else{
             alert('Во время обработки заявки произошла ошибка!')
           }
