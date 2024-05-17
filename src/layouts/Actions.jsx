@@ -113,13 +113,15 @@ export default function Actions({ children, user }) {
                 // Меняем статус. Если пользователь принадлежит отделу "стройка (9) или завод (7), 
                 // то передаем в обработку к контролёру (статус заявки 3), иначе отправляем на обработку снабжению (статус 5)"
                 if(userDivisionId === 7 || userDivisionId === 9 ){
+                  sendMailToUser(null, userDivisionId, 5,`Ваш подчинённый создал заявку №${requestId}. Подтвердите её, либо измените список материалов.`); //Отправляем сообщение контролёру
                   setStatus(requestId, 3)
                     .then(res => !res.status && alert('При изменении статуса заявки возникла ошибка!'))
                     .catch(err => alert('Возникла внутренняя ошибка!'));
                   }else{
-                  setStatus(requestId, 5)
-                    .then(res => !res.status && alert('При изменении статуса заявки возникла ошибка!'))
-                    .catch(err => alert('Возникла внутренняя ошибка!'));
+                    sendMailToUser(null, 2, null, `Вам поступила заявка №${requestId}. Обаботайте её.`);  //Отправляем сообщение снабжению
+                    setStatus(requestId, 5)
+                      .then(res => !res.status && alert('При изменении статуса заявки возникла ошибка!'))
+                      .catch(err => alert('Возникла внутренняя ошибка!'));
                 }
               })
               .catch(err => alert('Возникла внутренняя ошибка!'));
