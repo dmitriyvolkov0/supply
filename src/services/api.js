@@ -235,10 +235,10 @@ export const blockUser = (userId, isBlocked) => {
     }
     
 // Отправка информации о статусе заявки по почте (в функцию передавать либо email либо divisionId)
-export const sendMailToUser = (email, divisionId, message) => {
+export const sendMailToUser = (email, divisionId, roleId, message) => {
     return fetch(apiUrl + 'sendMailToUser', {
         method: 'POST',
-        body: JSON.stringify({ email: email, divisionId: divisionId, message: message  })
+        body: JSON.stringify({ email: email, divisionId: divisionId, roleId: roleId, message: message  })
     })
     .then(res => res.json())
     .then(res => res)
