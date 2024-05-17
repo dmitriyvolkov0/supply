@@ -195,7 +195,7 @@ export default function Actions({ children, user }) {
             addHistoryItem(requestId, 7, user.id);
             getUserByRequestId(requestId)
             .then(res => {
-              sendMailToUser(res.userData.email, null, null, `Ваша заявка №${requestId} поступила на склад. Скоро кладовщик укажет на какой именно.`)  //Отправляем сообщение заказчику
+              sendMailToUser(res.userData.email, null, null, `Ваш заказ №${requestId} поступил на склад. Скоро кладовщик укажет на какой именно.`)  //Отправляем сообщение заказчику
             });
           }else{
             alert('Во время обработки заявки произошла ошибка!')
