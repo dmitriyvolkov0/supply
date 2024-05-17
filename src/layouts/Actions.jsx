@@ -276,6 +276,10 @@ export default function Actions({ children, user }) {
           if(res.status){
             alert('Заявка успешно обработана!');
             addHistoryItem(requestId, 10, user.id);
+            getUserByRequestId(requestId)
+              .then(res => {
+                sendMailToUser(res.userData.email, null, null, `Вы успешно получили заказ №${requestId}! Не забудьте перенести его в архив в веб-приложении supply!`); //Отправляем сообщение заказчику на какой склад прибыли материалы
+              });
           }else{
             alert('Во время обработки заявки произошла ошибка!')
           }
