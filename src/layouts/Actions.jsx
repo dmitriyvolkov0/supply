@@ -229,6 +229,10 @@ export default function Actions({ children, user }) {
               if(res.status){
                 alert('Склад успешно указан!');
                 addHistoryItem(requestId, 9, user.id);
+                getUserByRequestId(requestId)
+                  .then(res => {
+                    sendMailToUser(res.userData.email, null, null, `Ваш заказ №${requestId} готов к выдаче на складе.`); //Отправляем сообщение заказчику на какой склад прибыли материалы
+                  });
               }else{
                 alert('Во время обработки заявки произошла ошибка!')
               }
