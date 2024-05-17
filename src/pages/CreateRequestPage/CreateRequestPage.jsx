@@ -35,7 +35,7 @@ export default function CreateRequestPage({ user }) {
           addHistoryItem(res.createRequest.requestId, 1, user.id); //Добавляем историю в бд
 
           //Отправляем сообщение на почту кладовщикам (divisionId 5 - кладовщики)
-          sendMailToUser(null, 5, 'Создана новая заявка! Обработайте её.');
+          sendMailToUser(null, 5, null, 'Создана новая заявка! Обработайте её.');
             
           navigate(REQUESTS_PAGE);
         }else{ alert('Возникла ошибка при создании заявки!'); }
